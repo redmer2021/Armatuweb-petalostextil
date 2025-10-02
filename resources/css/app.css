@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.ventanaModal {
+    @apply 
+        fixed 
+        inset-0 
+        flex 
+        bg-black/50 
+        opacity-100         
+        z-50
+        transition-opacity;
+  }
+
+  .ventanaInterna_1{
+    @apply 
+        w-[98%] md:w-[70%] 
+        h-[90vh] md:h-[90vh] 
+        bg-white 
+        m-auto 
+        p-[0.5rem] md:p-[1rem]
+        flex 
+        flex-col 
+        overflow-y-scroll 
+        relative;
+}
+
+.ventanaInterna_2{
+    @apply 
+        w-[90%] md:w-[40%] 
+        h-[20vh] md:h-[40vh] 
+        bg-[#ccd5ae]
+        mt-[5rem]
+        mx-auto
+        rounded-md
+        p-[0.5rem] md:p-[1rem]
+        flex 
+        flex-col
+        bg-cover 
+        bg-center;
+}
+
+.ventanaInterna_3{
+    @apply 
+        w-[90%] md:w-[30%] 
+        h-auto
+        self-start
+        bg-white
+        mt-[5rem]
+        mx-auto
+        rounded-md
+        p-[1rem] md:p-[2rem];
+}
+
+.ventanaInterna_4{
+    @apply 
+        w-[90%] md:w-[45%] 
+        h-auto
+        self-start
+        bg-white
+        mt-[5rem]
+        mx-auto
+        rounded-md
+        p-[0.5rem] md:p-[2rem];
+}
+
+.ventanaInterna_5{
+    @apply 
+        w-[90%] md:w-[30%] 
+        h-auto
+        self-start
+        bg-white
+        mt-[5rem]
+        mx-auto
+        rounded-md
+        p-[0.5rem] md:p-[2rem];
+}
+
+

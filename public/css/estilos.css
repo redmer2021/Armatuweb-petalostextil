@@ -1,0 +1,12 @@
+.slick-prev:before,
+.slick-next:before {
+    color: black !important;   /* o blanco si el fondo es oscuro */
+    font-size: 30px !important;
+    opacity: 1 !important;
+}
+
+.slick-prev {
+    left: -35px;
+}
+
+
