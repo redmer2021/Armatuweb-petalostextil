@@ -4,6 +4,7 @@ namespace App\Livewire\Componentes;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Catalogo extends Component
@@ -21,6 +22,7 @@ class Catalogo extends Component
 
     public $item_id_articulo = 0;
     public $item_fotoPrincipal = '';
+    public $item_fotosOtras = [];
     public $item_nombre = '';
     public $item_precio = 0;
     public $item_descTransfer = 0;
@@ -109,6 +111,10 @@ class Catalogo extends Component
             $this->cantItemsComprados--;
     }
 
+    public function SeleccionaFoto($fotoSelec){
+        $this->item_fotoPrincipal = $fotoSelec;
+    }
+
     public function IniciarCompra($id){
         $this->cantItemsComprados = 1;
         $this->verForm=true;
@@ -118,6 +124,11 @@ class Catalogo extends Component
         if ($articulo){
             $this->item_id_articulo = $articulo->id;
             $this->item_fotoPrincipal = $articulo->nomFoto;
+            $this->item_fotosOtras = DB::table('tb_fotos')
+            ->select('nomFoto')
+            ->where('id_articulo', $id)
+            ->get();
+
             $this->item_nombre = $articulo->nombre;
             $this->item_precio = $articulo->precio;
             $this->item_descTransfer = $articulo->descPorTransfer;
@@ -135,44 +146,25 @@ class Catalogo extends Component
         }
     }
 
-    public function Buscar(){
-        $this->txtabuscar = $this->txtabuscar;
+    #[On('filtrarPorNombre')] 
+    public function Buscar($cadBusqueda){
         $this->idCategoria = 0;
-        $this->RenderizarBanner=false;
-        if ($this->txtabuscar!=''){
-            $this->titCatalogo = 'Buscando ' . $this->txtabuscar . ' en el Catálogo';
-        } else {
-            $this->titCatalogo = 'CATÁLOGO COMPLETO';
-        }
+        $this->txtabuscar = $cadBusqueda;
     }
 
+    #[On('filtratCat')] 
     public function SelecCat($idCat){
         $this->idCategoria = $idCat;
-        $this->txtabuscar = ''; // reset búsqueda
-        $this->RenderizarBanner=false;
-        $this->setTitulo();
+        $this->txtabuscar = '';
     }
-
-    private function setTitulo()
-    {
-        $categoria = DB::table('tb_categorias')
-            ->where('id', $this->idCategoria)
-            ->value('nombre');
-
-        $this->titCatalogo = $categoria
-            ? strtoupper($categoria)
-            : 'CATÁLOGO COMPLETO';
-    }    
 
     public function mount()
     {
         $query = DB::table('tb_categorias');
         $this->categorias = $query->get();
 
-        $this->setTitulo();
         $this->dispatch('componente-montado');
     }
-
     
     public function render()
     {

@@ -1,0 +1,64 @@
+https://hpanel.hostinger.com/
+recursoslienzovirtual@gmail.com
+Galleta1712
+
+base de datos: u198806765_bd_petalos
+password     : 9Jz[Lc/l
+
+
+cuenta de mail en servidor de producción
+petalostextil@lienzovirtual.com.ar
+password: v/]$M^Wn?F6
+
+
+
+
+Generar una clave hash
+php artisan tinker
+    use Illuminate\Support\Facades\Hash;
+    Hash::make('arma68on');
+exit
+
+Petalos-vendedor
+user id: 2568218202
+usuario: TESTUSER1925475887
+clave  : HKKexGYem5
+
+Petalos-comprador
+user id: 2711 955204
+usuario: TESTUSER6717969765039474815
+clave  : 793A34DF#5037#4ea5#
+
+visa de pruebas
+4509 9535 6623 3704
+123
+11/30
+nombre de titular: APRO para pago aprobado
+dni: 12345678
+
+
+
+Desa-Vendedor
+user id: 2568218202
+usuario: TESTUSER1925475887
+clave  : HKKexGYem5
+
+
+public key: APP_USR-e5832f3b-e9d5-43ed-b686-66c9e9ccb389
+Access Token: APP_USR-7769717995266034-092411-7fc8ae7822d00194751b34b0e9e3e2ff-2568218202
+client id: 7769717995266034
+client secret: Mf4LavIketP8YlpItxCp6pqr0xKcW8Ih
+
+Mercado Pago - Producci�n 
+Public Key: APP_USR-5ae89329-d691-4920-8c51-5bf1b4c15fde
+Access Token: APP_USR-6702669543275474-092421-c416aeb3b242699237e54ab0b6983bcb-96664860
+
+Client ID: 6702669543275474
+Client Secret: iuNzCRvtmVlcGdADDRAzPFKK0oMyaZbh
+
+
+
+https://petalostextil.lienzovirtual.com.ar/clear-cache/Makako1029
+
+
+

@@ -1,12 +1,23 @@
-.slick-prev:before,
-.slick-next:before {
-    color: black !important;   /* o blanco si el fondo es oscuro */
-    font-size: 30px !important;
-    opacity: 1 !important;
+.swiper-button-prev {
+  color: #979696;
+  left: 30px !important; /* 🔹 Mueve la flecha izquierda */
 }
 
-.slick-prev {
-    left: -35px;
+.swiper-button-next {
+  color: #979696;
+  right: 30px !important; /* 🔹 Mueve la flecha derecha */
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-weight: bold !important;     /* 🔹 Hace las flechas más "bold" */
+  font-size: 25px !important;      /* 🔹 Ajusta el tamaño si querés */
+}
+
+/* Opcional: cambia color al pasar el mouse */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #E9E9E9;
 }
 
 

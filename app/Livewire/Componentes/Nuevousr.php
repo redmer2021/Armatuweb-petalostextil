@@ -19,6 +19,7 @@ class Nuevousr extends Component
     public $verForm = false;
     public $verFormNuevoUsr = false;
     public $verFormRecuperarClave = false;
+    public $verFormEditPerfil = false;
     public $verMsgUsr1 = false;
     public $verMsgUsr2 = false;
 
@@ -50,6 +51,120 @@ class Nuevousr extends Component
         $this->verForm = false;
         $this->verFormNuevoUsr = true;
     }
+
+    public function EditarPerfil(){
+        // Obtener el usuario logueado
+        $user = Auth::user();
+
+        if ($user) {
+            $this->txtNomApe = $user->nomApe;
+            $this->txtEmail = $user->email;
+            
+            // Obtener la dirección de envío del usuario
+            $tb_direc_envios = DB::table('tb_direc_envios')
+            ->where('idUser', $user->id)
+             ->first();
+            if ($tb_direc_envios) {
+                $this->dirCalle = $tb_direc_envios->calle;
+                $this->dirAltura = $tb_direc_envios->altura;
+                $this->dirProvincia = $tb_direc_envios->idProvincia;
+                $this->dirLocalidad = $tb_direc_envios->localidad;
+                $this->dirCodPostal = $tb_direc_envios->codPostal;
+            }
+        }
+        $this->verFormEditPerfil = true;
+    }
+
+    public function CancelarEditarPerfil(){
+        $this->LimpiarCampos();
+        $this->verFormEditPerfil = false;
+    }
+
+    public function GrabarEditPerfil(){
+
+        $rules = [
+            'txtNomApe' => ['required'],
+            'dirCalle' => ['required'],
+            'dirAltura' => ['required'],
+            'dirProvincia' => ['required', 'not_in:0'],
+            'dirCodPostal' => ['required'],
+        ];
+    
+        $messages = [
+            'txtNomApe.required' => 'Debe ingresar su nombre y apellido',
+            'dirCalle.required' => 'Debe ingresar la calle',
+            'dirAltura.required' => 'Debe ingresar altura',
+            'dirProvincia.required' => 'Debe seleccionar una provincia',
+            'dirProvincia.not_in' => 'Debe seleccionar una provincia válida',
+            'dirCodPostal.required' => 'Debe ingresar Código Postal',
+        ];
+    
+        // Si el usuario quiere cambiar la contraseña
+        if (!empty($this->txtUserPassword)) {
+            $rules['txtUserPassword'] = ['required'];
+            $rules['txtUserPasswordReing'] = ['required', 'same:txtUserPassword'];
+    
+            $messages['txtUserPassword.required'] = 'Debe ingresar Contraseña';
+            $messages['txtUserPasswordReing.required'] = 'Debe reingresar la contraseña';
+            $messages['txtUserPasswordReing.same'] = 'Las contraseñas no coinciden';
+        }
+    
+        $this->validate($rules, $messages);        
+
+        $user = Auth::user();
+
+        // Actualizar nombre y apellido del usuario
+        $updateData = [
+            'nomApe' => $this->txtNomApe,
+            'updated_at' => now()
+        ];
+
+        // Si ingresó contraseña, actualizar también
+        if (!empty($this->txtUserPassword)) {
+            $updateData['password'] = bcrypt($this->txtUserPassword);
+        }
+
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update($updateData);
+
+        // Verificar si existe dirección
+        $direccion = DB::table('tb_direc_envios')
+        ->where('idUser', $user->id)
+        ->first();
+        
+
+        if ($direccion) {
+            // Actualizar registro existente
+            DB::table('tb_direc_envios')
+                ->where('idUser', $user->id)
+                ->update([
+                    'calle' => $this->dirCalle,
+                    'altura' => $this->dirAltura,
+                    'idProvincia' => $this->dirProvincia,
+                    'localidad' => $this->dirLocalidad,
+                    'codPostal' => $this->dirCodPostal,
+                    'updated_at' => now()
+                ]);
+        } else {
+            // Insertar nuevo registro
+            DB::table('tb_direc_envios')->insert([
+                'idUser' => $user->id,
+                'tipDirec' => 1,
+                'calle' => $this->dirCalle,
+                'altura' => $this->dirAltura,
+                'idProvincia' => $this->dirProvincia,
+                'localidad' => $this->dirLocalidad,
+                'codPostal' => $this->dirCodPostal,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+ 
+        $this->LimpiarCampos();
+        $this->verFormEditPerfil = false;
+    }
+
 
     public function RecuperarClave(){
         $this->verForm = false;
@@ -98,7 +213,8 @@ class Nuevousr extends Component
             ]);
 
             //disparar mail para validar cuenta
-            $url = url('recuperar-cta/' . $token);            
+            $url = url('recuperar-cta/' . $token);
+            //Log::info($url);
             Mail::to($this->txtEmailRecup)->send(new Regenerarpassword($url));            
 
             $this->resetErrorBag();
@@ -145,9 +261,11 @@ class Nuevousr extends Component
             'dirCodPostal.required' => 'Debe ingresar Código Postal',
         ]);
 
+        
         DB::beginTransaction();
         //Generar token único
         $activationToken = Str::random(64);
+        
 
         try {
             $idUser = DB::table('users')->insertGetId([

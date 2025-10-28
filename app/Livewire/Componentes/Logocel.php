@@ -4,10 +4,10 @@ namespace App\Livewire\Componentes;
 
 use Livewire\Component;
 
-class Slider extends Component
+class Logocel extends Component
 {
     public function render()
     {
-        return view('livewire.componentes.slider');
+        return view('livewire.componentes.logocel');
     }
 }

@@ -1,8 +1,11 @@
-<div class="items-center">
-    <div wire:click="VerCarrito()" class="flex flex-col items-center cursor-pointer">
-        <img src="{{ asset('imgs/carrito.png') }}" alt="Carrito de compras" class="w-[1.5rem] h-[1.5rem] md:h-[1.5rem]">
-        <span class="text-[10px] md:text-xs">{{ $totalCantidad }}</span>
-        <span class="text-[10px] md:text-xs font-bold">$ {{ number_format($totalPrecio, 2, '.', ',') }}</span>
+<div>
+    <div wire:click="VerCarrito()" class="flex cursor-pointer relative">
+        <img src="{{ asset('imgs/carrito.svg') }}" alt="Carrito de compras" class="w-[2.8rem] h-[2.8rem]">
+        <div class="flex flex-col">
+            <span class="text-[14px] hidden md:block font-bold md:text-[16px]">Carrito</span>
+            <span class="md:hidden absolute -top-2 right-4 text-black">{{ $totalCantidad }}</span>
+            <span class="text-[14px] hidden md:block md:text-[16px]">$ {{ number_format($totalPrecio, 2, '.', ',') }}</span>
+        </div>
     </div>
 
     @script

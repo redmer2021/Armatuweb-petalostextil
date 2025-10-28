@@ -23,14 +23,16 @@
 
   .ventanaInterna_1{
     @apply 
-        w-[98%] md:w-[70%] 
-        h-[90vh] md:h-[90vh] 
+        w-[98%] md:w-[60%] 
+        h-[90vh] md:h-[75vh] 
         bg-white 
         m-auto 
-        p-[0.5rem] md:p-[1rem]
-        flex 
+        p-[0.5rem] md:p-[2.5rem]
+        /*flex 
         flex-col 
-        overflow-y-scroll 
+           */
+        overflow-y-scroll
+        md:overflow-hidden
         relative;
 }
 

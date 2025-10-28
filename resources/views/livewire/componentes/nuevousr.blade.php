@@ -2,16 +2,18 @@
     <div>
         <div class="flex flex-col items-center cursor-pointer">
             @if(Auth::check())
-            <!-- Usuario logueado -->
-                <img src="{{ asset('imgs/userNuevo.png') }}" alt="Nuevo Usuario" class="h-[1.5rem] md:h-[1.5rem] w-auto">
-                <span class="text-[10px] md:text-xs">{{ Auth::user()->nomApe }}</span>
-                <span wire:click="CerrarSesion()" class="text-[10px] md:text-xs">Cerrar Sesión</span>
+                <!-- Usuario logueado -->
+                <img src="{{ asset('imgs/userNuevo.png') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2rem] w-auto">
+                <span wire:click="EditarPerfil()" class="hover:underline text-[10px] md:text-xs">Perfil: {{ Auth::user()->nomApe }}</span>
+                <span wire:click="CerrarSesion()" class="hover:underline text-[10px] md:text-xs">Cerrar Sesión</span>
             @else
                 <!-- Usuario no logueado -->
-                <div wire:click="VerLogin()" class="flex flex-col items-center cursor-pointer">
-                    <img  src="{{ asset('imgs/userNuevo.png') }}" alt="Nuevo Usuario" class="h-[1.5rem] md:h-[1.5rem] w-auto">
-                    <span class="text-[10px] md:text-xs">Entrá</span>
-                    <span class="text-[10px] md:text-xs">Registrate</span>
+                <div wire:click="VerLogin()" class="hover:underline flex cursor-pointer">
+                    <img  src="{{ asset('imgs/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2.3rem] w-auto">
+                    <div class="flex flex-col ml-2">
+                        <span class="text-[#1F1F1F] hidden md:block font-bold text-[14px] md:text-[16px]">Iniciar Sesión</span>
+                        <span class="text-[#1F1F1F] hidden md:block text-[14px] md:text-[16px]">Registrate</span>
+                    </div>
                 </div>
             @endif
         </div>
@@ -139,6 +141,88 @@
                 @endif
             </div>
         </section>
+
+        <!-- Formulario para Editar Perfil de Usuario -->
+        <section 
+            class="ventanaModal" 
+            x-cloak 
+            x-show="$wire.verFormEditPerfil" 
+            x-transition.duration.0ms
+            x-effect="document.body.classList.toggle('overflow-hidden', $wire.verFormEditPerfil)"
+        >
+            <div class="ventanaInterna_4">
+                <span class="block text-3xl text-center md:text-4xl font-bold" >Editando Perfil</span>
+                <div class="grid md:grid-cols-2 gap-3 mt-[1rem]">
+                    <div>
+                        <label class="text-xs" for="txtNomApe">Nombre y Apellido</label>
+                        <input id="txtNomApe" wire:model="txtNomApe" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtNomApe') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Tu nombre y apellido...">
+                    </div>
+                    <div>
+                        <label class="text-xs" for="txtEmail">Email</label>
+                        <input id="txtEmail" wire:model="txtEmail" type="text" class="block w-full px-2 py-2 text-md border-[1px]  border-gray-400 focus:outline-none focus:ring-0" readonly>
+                    </div>
+
+                    <div>
+                        <label class="text-xs" for="txtUserPassword">Contraseña</label>
+                        <input id="txtUserPassword" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPassword') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa una password...">
+                    </div>
+                    <div>
+                        <label class="text-xs" for="txtUserPasswordReing">Reingresa la contraseña</label>
+                        <input id="txtUserPasswordReing" wire:model="txtUserPasswordReing" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPasswordReing') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Reingresa la password...">
+                        @error('txtUserPasswordReing')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
+                        @enderror
+                    </div>
+
+                </div>
+
+                <div class="mt-[1rem]">
+                    <span class="text-xs font-bold">Dirección principal para recibir tus compras</span>
+                    <div class="grid grid-cols-12 gap-3">
+                        <div class="col-span-9">
+                            <label class="text-xs" for="dirCalle">Calle</label>
+                            <input id="dirCalle" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
+                        </div>
+                        <div class="col-span-3">
+                            <label class="text-xs" for="dirAltura">Altura</label>
+                            <input id="dirAltura" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
+                        </div>
+
+                        <div class="col-span-12 md:col-span-5">
+                            <label class="text-xs" for="dirProvincia">Provincia</label>
+                            <select wire:model="dirProvincia" class="text-md py-2 w-full border-[1px] @error('dirProvincia') border-red-500 @else border-gray-400 @enderror " name="dirProvincia" id="dirProvincia">
+                                <option value="0">Seleccionar Provincia...</option>
+                                @foreach ($tb_provincias as $provincia)
+                                    <option value="{{ $provincia->id }}">{{ $provincia->nombre }}</option>                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-span-8 md:col-span-5">
+                            <label class="text-xs" for="dirLocalidad">Localidad</label>
+                            <input id="dirLocalidad" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
+                        </div>
+                        <div class="col-span-4 md:col-span-2">
+                            <label class="text-xs" for="dirCodPostal">Código Postal</label>
+                            <input id="dirCodPostal" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
+                        </div>
+                    </div>
+
+                    <div class="mt-[2rem] flex justify-end space-x-2">
+                        <button wire:click.stop="CancelarEditarPerfil()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cancelar</button>
+                        <button wire:click.stop="GrabarEditPerfil()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Grabar Datos</button>
+                    </div>
+    
+                </div>
+
+                <!-- Mostrar un solo mensaje de error -->
+                @if ($errors->any())
+                    <p class="mt-2 text-sm text-red-600 font-medium">
+                        Debe completar todos los campos
+                    </p>
+                @endif
+            </div>
+        </section>
+
 
         <!-- Formulario para Recuperar clave de acceso -->
         <section 

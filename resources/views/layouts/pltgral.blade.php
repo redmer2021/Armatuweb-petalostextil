@@ -10,28 +10,29 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
-
-        <!-- CSS de Slick -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-
-        <!-- jQuery + JS de Slick -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
-        {{-- <link href="{{ asset('build/assets/app-K1NmrUs8.css') }}" rel="stylesheet"> --}}
+        <!-- Swiper CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
         @livewireStyles
+        @stack('styles') {{-- 🔹 permite que otros componentes agreguen estilos --}}        
     </head>
     <body>
         @yield('contenidosPrincipales')
 
-        @yield('scriptsJava')
-        
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        {{-- 🔹 Scripts globales --}}
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
         @livewireScripts
+        @stack('scripts')
     </body>
 </html>
