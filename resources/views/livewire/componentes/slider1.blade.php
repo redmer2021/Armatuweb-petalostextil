@@ -37,7 +37,6 @@
             el: '.swiper-scrollbar',
         },
         });
-
     </script>
 @endscript
 

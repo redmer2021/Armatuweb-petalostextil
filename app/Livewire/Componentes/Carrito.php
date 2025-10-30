@@ -14,8 +14,8 @@ class Carrito extends Component
 {
     public $totalCantidad = 0;
     public $totalPrecio = 0;
-    public $totEnvioDom = 9350;
-    public $totEnvioPto = 7250;
+    public $totEnvioDom = 0;
+    public $totEnvioMoto = 10000;
     public $totalFinal = 0;
     public $totalConDesc= 0;
     public $pjeDescTransfer = 25;
@@ -23,6 +23,16 @@ class Carrito extends Component
     public $carrito = [];
     public $guidCarrito;
     public $tipEnvio = 0;
+    public $tipPago = false;
+
+    public $dirCalleAltura = '';
+    public $dirProvincia = '';
+    public $dirLocalidad = '';
+    public $dirBarrio='';
+    public $dirCodPostal = '';
+    public $dirEntreCalles = '';
+    public $tb_provincias = [];
+    
 
     #[On('cerrar-carrito')]
     public function CerrarForm(){
@@ -31,14 +41,20 @@ class Carrito extends Component
 
     public function VerCarrito(){
         $this->carrito = DB::table('vta_carrito')
+        ->where('estado', 0)
         ->where('guidCarrito', $this->guidCarrito)
-        ->get();        
+        ->get();
+        $this->reset([
+            'tipEnvio',
+            'tipPago'
+        ]);
         $this->verForm = true;
     }
 
     #[On('recargar-carrito')] 
     public function RecargarCarrito(){
         $this->carrito = DB::table('vta_carrito')
+        ->where('estado', 0)
         ->where('guidCarrito', $this->guidCarrito)
         ->get();        
     }
@@ -49,10 +65,10 @@ class Carrito extends Component
         $this->guidCarrito = $uuid;
         $carrito = DB::table('tb_carrito')
         ->selectRaw('SUM(cantidad) as total_cantidad, SUM(cantidad * precioUnit) as total_precio')
+        ->where('estado', 0)
         ->where('guidCarrito', $uuid)
         ->first();
 
-        // Guardar resultados en propiedades (si queres usarlos en la vista)
         $this->totalCantidad = $carrito->total_cantidad ?? 0;
         $this->totalPrecio   = $carrito->total_precio ?? 0;
 
@@ -60,9 +76,38 @@ class Carrito extends Component
 
     }
 
-    public function updatedTipEnvio($value)
+    public function updatedTipEnvio()
     {
+        $this->resetErrorBag();
+        $this->reset([
+            'dirCalleAltura',
+            'dirProvincia',
+            'dirLocalidad',
+            'dirBarrio',
+            'dirCodPostal',
+            'dirEntreCalles'
+        ]);
+
         $this->recalcularTotal();
+    }
+
+    public function updatedDirProvincia(){
+        $costoEnvio = DB::table('tb_provincias')
+        ->select('impoEnvio')
+        ->where('id', $this->dirProvincia)
+        ->first();
+        $this->totEnvioDom = $costoEnvio->impoEnvio;
+        $this->recalcularTotal();
+    }
+    
+    public function updatedTipPago()
+    {
+        $this->resetErrorBag();
+        if ($this->tipPago){
+            $this->totalFinal = $this->totalConDesc;
+        } else {
+            $this->recalcularTotal();
+        }
     }
     
     private function recalcularTotal()
@@ -70,13 +115,17 @@ class Carrito extends Component
         if ($this->tipEnvio == 1) {
             $this->totalFinal = $this->totalPrecio + $this->totEnvioDom;
         } elseif ($this->tipEnvio == 2) {
-            $this->totalFinal = $this->totalPrecio + $this->totEnvioPto;
+            $this->totalFinal = $this->totalPrecio + $this->totEnvioMoto;
         } else {
             $this->totalFinal = $this->totalPrecio;
         }
 
         // aplicar descuento sobre totalFinal
         $this->totalConDesc = $this->totalFinal - ($this->totalFinal * $this->pjeDescTransfer / 100);        
+
+        if ($this->tipPago){
+            $this->totalFinal = $this->totalConDesc;
+        }
 
     }
 
@@ -135,6 +184,78 @@ class Carrito extends Component
     }
 
     public function IniciarPago2(){
+
+        if (empty($this->tipEnvio) || $this->tipEnvio == 0) {
+            $this->addError('tipEnvio', 'Debe seleccionar un medio de envío');
+            return;
+        }
+
+        if ($this->tipEnvio == 1){
+            $rules = [
+                'dirCalleAltura' => ['required'],
+                'dirProvincia' => ['required', 'not_in:0'],
+                'dirCodPostal' => ['required'],
+            ];
+        
+            $messages = [
+                'dirCalleAltura.required' => 'Debe ingresar Calle',
+                'dirProvincia.required' => 'Debe ingresar la Provincia',
+                'dirProvincia.not_in' => 'Debe ingresar la Provincia',
+                'dirCodPostal.not_in' => 'Debe ingresar su Código Postal',
+            ];
+        } else if ($this->tipEnvio == 2){
+            $rules = [
+                'dirCalleAltura' => ['required'],
+                'dirCodPostal' => ['required'],
+            ];
+        
+            $messages = [
+                'dirCalleAltura.required' => 'Debe ingresar Calle',
+                'dirCodPostal.not_in' => 'Debe ingresar su Código Postal',
+            ];
+        }
+        if ($this->tipEnvio >=1 and $this->tipEnvio <=2){
+            $this->validate($rules, $messages);
+
+            DB::table('tb_envios_pendientes')->insert([
+                'guidCarrito' => $this->guidCarrito,
+                'dirCalleAltura' => $this->dirCalleAltura,
+                'dirProvincia' =>  $this->tipEnvio == 1 ? $this->dirProvincia : 24,
+                'dirLocalidad' => $this->dirLocalidad,
+                'dirBarrio' => $this->dirBarrio,
+                'dirCodPostal' => $this->dirCodPostal,
+                'dirEntreCalles' => $this->dirEntreCalles ?? '',
+                'estado' => 0,
+                'enviarPor' => $this->tipEnvio,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            //El estado 1 es pendiente de envío por correo o por moto
+            $updateData = [
+                'estado' => 1,
+                'updated_at' => now()
+            ];
+    
+            DB::table('tb_carrito')
+                ->where('guidCarrito', $this->guidCarrito)
+                ->update($updateData);
+    
+            $this->totalCantidad = 0;
+            $this->totalPrecio   = 0;
+        } else {
+            //El estado 2 es pendiente de retiro por domicilio
+            $updateData = [
+                'estado' => 2,
+                'updated_at' => now()
+            ];
+    
+            DB::table('tb_carrito')
+                ->where('guidCarrito', $this->guidCarrito)
+                ->update($updateData);    
+        }
+
+        dd('p');
+        
         try{
             MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
             
@@ -173,6 +294,107 @@ class Carrito extends Component
         } catch (\Exception $e) {
             Log::info($e->getMessage());
         }
+    }
+
+    public function Aceptar(){
+
+        if (empty($this->tipEnvio) || $this->tipEnvio == 0) {
+            $this->addError('tipEnvio', 'Debe seleccionar un medio de envío');
+            return;
+        }
+
+        if ($this->tipEnvio == 1){
+            $rules = [
+                'dirCalleAltura' => ['required'],
+                'dirProvincia' => ['required', 'not_in:0'],
+                'dirCodPostal' => ['required'],
+            ];
+        
+            $messages = [
+                'dirCalleAltura.required' => 'Debe ingresar Calle',
+                'dirProvincia.required' => 'Debe ingresar la Provincia',
+                'dirProvincia.not_in' => 'Debe ingresar la Provincia',
+                'dirCodPostal.not_in' => 'Debe ingresar su Código Postal',
+            ];
+        } else if ($this->tipEnvio == 2){
+            $rules = [
+                'dirCalleAltura' => ['required'],
+                'dirCodPostal' => ['required'],
+            ];
+        
+            $messages = [
+                'dirCalleAltura.required' => 'Debe ingresar Calle',
+                'dirCodPostal.not_in' => 'Debe ingresar su Código Postal',
+            ];
+        }
+        if ($this->tipEnvio >=1 and $this->tipEnvio <=2){
+            $this->validate($rules, $messages);
+
+            DB::table('tb_envios_pendientes')->insert([
+                'guidCarrito' => $this->guidCarrito,
+                'dirCalleAltura' => $this->dirCalleAltura,
+                'dirProvincia' =>  $this->tipEnvio == 1 ? $this->dirProvincia : 24,
+                'dirLocalidad' => $this->dirLocalidad,
+                'dirBarrio' => $this->dirBarrio,
+                'dirCodPostal' => $this->dirCodPostal,
+                'dirEntreCalles' => $this->dirEntreCalles ?? '',
+                'estado' => 0,
+                'enviarPor' => $this->tipEnvio,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            //El estado 1 es pendiente de envío por correo o por moto
+            $updateData = [
+                'estado' => 1,
+                'updated_at' => now()
+            ];
+    
+            DB::table('tb_carrito')
+                ->where('guidCarrito', $this->guidCarrito)
+                ->update($updateData);
+    
+            $this->totalCantidad = 0;
+            $this->totalPrecio   = 0;
+        } else {
+            //El estado 2 es pendiente de retiro por domicilio
+            $updateData = [
+                'estado' => 2,
+                'updated_at' => now()
+            ];
+    
+            DB::table('tb_carrito')
+                ->where('guidCarrito', $this->guidCarrito)
+                ->update($updateData);
+    
+            $this->totalCantidad = 0;
+            $this->totalPrecio   = 0;
+        }
+
+        
+        //eliminar-uuid
+        $this->dispatch(
+            'eliminar-uuid',
+            uuid: $this->guidCarrito 
+        );
+
+        $this->reset([
+            'tipEnvio',
+            'tipPago',
+            'dirCalleAltura',
+            'dirProvincia',
+            'dirLocalidad',
+            'dirBarrio',
+            'dirCodPostal',
+            'dirEntreCalles'
+        ]);
+
+        $this->verForm=false;
+    }
+
+    public function mount()
+    {
+        $query = DB::table('tb_provincias');
+        $this->tb_provincias = $query->get();
     }
 
 

@@ -61,4 +61,34 @@ Client Secret: iuNzCRvtmVlcGdADDRAzPFKK0oMyaZbh
 https://petalostextil.lienzovirtual.com.ar/clear-cache/Makako1029
 
 
+CREATE TABLE IF NOT EXISTS `tb_suscriptores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `tb_suscriptores`;
+INSERT INTO `tb_suscriptores` (`id`, `email`, `created_at`, `updated_at`) VALUES
+	(1, 'rmerlo@gmail.com', '2025-10-28 19:25:16', '2025-10-28 19:25:16'),
+	(3, 'rdm1@gmail.com', '2025-10-28 19:35:01', '2025-10-28 19:35:01'),
+	(4, 'rmerlo1@gmail.com', '2025-10-28 19:35:34', '2025-10-28 19:35:34'),
+	(5, 'rmerlo@gmail.com.ar', '2025-10-28 19:36:19', '2025-10-28 19:36:19'),
+	(6, 'rmerlo2@gmail.com', '2025-10-28 19:45:26', '2025-10-28 19:45:26');
+
+
+
+
+select 
+    a.id AS id,
+    a.guidCarrito AS guidCarrito,
+    a.idArticulo AS idArticulo,
+    a.cantidad AS cantidad,
+    a.precioUnit AS precioUnit,
+    b.nombre AS nombre,
+    b.stockActual AS stockActual,
+    c.nro_foto AS nro_foto,
+    c.nomFoto AS nomFoto from ((tb_carrito a join tb_articulos b on((a.idArticulo = b.id))) join tb_fotos c on((a.idArticulo = c.id_articulo)))
+
 

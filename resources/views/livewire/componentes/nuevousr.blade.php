@@ -33,8 +33,8 @@
                     <input id="txtUserName" wire:model="txtUserName" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Ingresa su email...">
                 </div>
                 <div class="mt-[1rem]">
-                    <label for="txtUserPassword">Contraseña</label>
-                    <input id="txtUserPassword" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Ingresa tu Contraseña...">
+                    <label for="txtUserPassword1">Contraseña</label>
+                    <input id="txtUserPassword1" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Ingresa tu Contraseña...">
                     <div class="my-4 flex justify-end">
                         <button wire:click.stop="RecuperarClave()" class="cursor-pointer text-xs underline">¿Olvidaste tu contraseña?</button>
                     </div>
@@ -70,24 +70,24 @@
                 <span class="block text-3xl text-center md:text-4xl font-bold" >Nuevo Usuario</span>
                 <div class="grid md:grid-cols-2 gap-3 mt-[1rem]">
                     <div>
-                        <label class="text-xs" for="txtNomApe">Nombre y Apellido</label>
-                        <input id="txtNomApe" wire:model="txtNomApe" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtNomApe') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Tu nombre y apellido...">
+                        <label class="text-xs" for="txtNomApe1">Nombre y Apellido</label>
+                        <input id="txtNomApe1" wire:model="txtNomApe" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtNomApe') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Tu nombre y apellido...">
                     </div>
                     <div>
-                        <label class="text-xs" for="txtEmail">Email</label>
-                        <input id="txtEmail" wire:model="txtEmail" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtEmail') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa tu Email">
+                        <label class="text-xs" for="txtEmail1">Email</label>
+                        <input id="txtEmail1" wire:model="txtEmail" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtEmail') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa tu Email">
                         @error('txtEmail')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
                         @enderror
                     </div>
 
                     <div>
-                        <label class="text-xs" for="txtUserPassword">Contraseña</label>
-                        <input id="txtUserPassword" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPassword') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa una password...">
+                        <label class="text-xs" for="txtUserPassword2">Contraseña</label>
+                        <input id="txtUserPassword2" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPassword') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa una password...">
                     </div>
                     <div>
-                        <label class="text-xs" for="txtUserPasswordReing">Reingresa la contraseña</label>
-                        <input id="txtUserPasswordReing" wire:model="txtUserPasswordReing" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPasswordReing') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Reingresa la password...">
+                        <label class="text-xs" for="txtUserPasswordReing1">Reingresa la contraseña</label>
+                        <input id="txtUserPasswordReing1" wire:model="txtUserPasswordReing" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPasswordReing') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Reingresa la password...">
                         @error('txtUserPasswordReing')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
                         @enderror
@@ -99,12 +99,12 @@
                     <span class="text-xs font-bold">Dirección principal para recibir tus compras</span>
                     <div class="grid grid-cols-12 gap-3">
                         <div class="col-span-9">
-                            <label class="text-xs" for="dirCalle">Calle</label>
-                            <input id="dirCalle" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
+                            <label class="text-xs" for="dirCalle1">Calle</label>
+                            <input id="dirCalle1" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
                         </div>
                         <div class="col-span-3">
-                            <label class="text-xs" for="dirAltura">Altura</label>
-                            <input id="dirAltura" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
+                            <label class="text-xs" for="dirAltura1">Altura</label>
+                            <input id="dirAltura1" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
                         </div>
 
                         <div class="col-span-12 md:col-span-5">
@@ -117,12 +117,12 @@
                             </select>
                         </div>
                         <div class="col-span-8 md:col-span-5">
-                            <label class="text-xs" for="dirLocalidad">Localidad</label>
-                            <input id="dirLocalidad" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
+                            <label class="text-xs" for="dirLocalidad1">Localidad</label>
+                            <input id="dirLocalidad1" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
                         </div>
                         <div class="col-span-4 md:col-span-2">
-                            <label class="text-xs" for="dirCodPostal">Código Postal</label>
-                            <input id="dirCodPostal" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
+                            <label class="text-xs" for="dirCodPostal1">Código Postal</label>
+                            <input id="dirCodPostal1" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
                         </div>
                     </div>
 
@@ -154,21 +154,21 @@
                 <span class="block text-3xl text-center md:text-4xl font-bold" >Editando Perfil</span>
                 <div class="grid md:grid-cols-2 gap-3 mt-[1rem]">
                     <div>
-                        <label class="text-xs" for="txtNomApe">Nombre y Apellido</label>
-                        <input id="txtNomApe" wire:model="txtNomApe" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtNomApe') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Tu nombre y apellido...">
+                        <label class="text-xs" for="txtNomApe2">Nombre y Apellido</label>
+                        <input id="txtNomApe2" wire:model="txtNomApe" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('txtNomApe') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Tu nombre y apellido...">
                     </div>
                     <div>
-                        <label class="text-xs" for="txtEmail">Email</label>
-                        <input id="txtEmail" wire:model="txtEmail" type="text" class="block w-full px-2 py-2 text-md border-[1px]  border-gray-400 focus:outline-none focus:ring-0" readonly>
+                        <label class="text-xs" for="txtEmail2">Email</label>
+                        <input id="txtEmail2" wire:model="txtEmail" type="text" class="block w-full px-2 py-2 text-md border-[1px]  border-gray-400 focus:outline-none focus:ring-0" readonly>
                     </div>
 
                     <div>
-                        <label class="text-xs" for="txtUserPassword">Contraseña</label>
-                        <input id="txtUserPassword" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPassword') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa una password...">
+                        <label class="text-xs" for="txtUserPassword3">Contraseña</label>
+                        <input id="txtUserPassword3" wire:model="txtUserPassword" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPassword') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Ingresa una password...">
                     </div>
                     <div>
-                        <label class="text-xs" for="txtUserPasswordReing">Reingresa la contraseña</label>
-                        <input id="txtUserPasswordReing" wire:model="txtUserPasswordReing" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPasswordReing') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Reingresa la password...">
+                        <label class="text-xs" for="txtUserPasswordReing2">Reingresa la contraseña</label>
+                        <input id="txtUserPasswordReing2" wire:model="txtUserPasswordReing" type="password" class="block w-full px-2 py-2 text-md border-[1px] @error('txtUserPasswordReing') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Reingresa la password...">
                         @error('txtUserPasswordReing')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>                        
                         @enderror
@@ -180,12 +180,12 @@
                     <span class="text-xs font-bold">Dirección principal para recibir tus compras</span>
                     <div class="grid grid-cols-12 gap-3">
                         <div class="col-span-9">
-                            <label class="text-xs" for="dirCalle">Calle</label>
-                            <input id="dirCalle" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
+                            <label class="text-xs" for="dirCalle2">Calle</label>
+                            <input id="dirCalle2" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
                         </div>
                         <div class="col-span-3">
-                            <label class="text-xs" for="dirAltura">Altura</label>
-                            <input id="dirAltura" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
+                            <label class="text-xs" for="dirAltura2">Altura</label>
+                            <input id="dirAltura2" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
                         </div>
 
                         <div class="col-span-12 md:col-span-5">
@@ -198,12 +198,12 @@
                             </select>
                         </div>
                         <div class="col-span-8 md:col-span-5">
-                            <label class="text-xs" for="dirLocalidad">Localidad</label>
-                            <input id="dirLocalidad" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
+                            <label class="text-xs" for="dirLocalidad2">Localidad</label>
+                            <input id="dirLocalidad2" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
                         </div>
                         <div class="col-span-4 md:col-span-2">
-                            <label class="text-xs" for="dirCodPostal">Código Postal</label>
-                            <input id="dirCodPostal" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
+                            <label class="text-xs" for="dirCodPostal2">Código Postal</label>
+                            <input id="dirCodPostal2" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
                         </div>
                     </div>
 

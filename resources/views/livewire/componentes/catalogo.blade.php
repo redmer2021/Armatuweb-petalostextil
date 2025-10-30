@@ -18,7 +18,7 @@
                         <div>
                             <p class="text-[#1F1F1F] text-[25px] font-bold">{{ $it->nombre }}</p>
                             <p class="text-[#1F1F1F] text-[20px]">$ {{ number_format($it->precio, 2, '.', ',') }}</p>
-                            <p class="text-[#1F1F1F] text-[15px] italic">{{ $it->cuotas }}</p>
+                            <p class="text-[#1F1F1F] text-[15px] italic">Unidades disponibles: {{ $it->stockActual }}</p>
                         </div>
 
                         <!-- Botón -->
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- 🔹 Imagen principal -->
-                <div class="h-full flex items-center justify-center overflow-hidden">
+                <div class="h-[30rem] flex items-center justify-center overflow-hidden">
                     <img 
                         src="{{ asset('imgs/' . $item_fotoPrincipal) }}" 
                         alt="Pétalos Textil" 
@@ -118,26 +118,26 @@
             </div>
         </div>
     </section>
-
-
-    @script
-        <script>
-            document.addEventListener('livewire:navigated', () => {
-                const uuidGuardado = localStorage.getItem('carrito_uuid');
-                if (uuidGuardado) {
-                    $wire.call('setUuid', uuidGuardado);
-                }
-            });
-        </script>
-    @endscript
-
-    @section('scriptsJava')
-        <script>
-            window.addEventListener('guardar-uuid', event => {
-                const uuid = event.detail.uuid; 
-                localStorage.setItem('carrito_uuid', uuid);
-            });
-        </script>
-    @endsection
-    
 </section>
+
+
+@script
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        const uuidGuardado = localStorage.getItem('carrito_uuid');
+        if (uuidGuardado) {
+            $wire.call('setUuid', uuidGuardado);
+        }
+    });
+</script>
+
+@endscript
+
+@script
+<script>
+    window.addEventListener('guardar-uuid', event => {
+        const uuid = event.detail.uuid; 
+        localStorage.setItem('carrito_uuid', uuid);
+    });
+</script>
+@endscript

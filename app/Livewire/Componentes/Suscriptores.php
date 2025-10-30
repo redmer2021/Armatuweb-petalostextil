@@ -12,12 +12,6 @@ class Suscriptores extends Component
 
     public function GrabarMail(){
         
-        // Eliminar espacios al inicio y al final (y en el medio, si querés)
-        $this->txtEmail = trim($this->txtEmail);
-
-        // También podés normalizar espacios intermedios:
-        $this->txtEmail = preg_replace('/\s+/', '', $this->txtEmail);        
-        
         $this->validate([
             'txtEmail' => ['required', 'email', 'unique:tb_suscriptores,email'],
         ], [

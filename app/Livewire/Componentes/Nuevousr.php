@@ -109,7 +109,7 @@ class Nuevousr extends Component
             $messages['txtUserPasswordReing.same'] = 'Las contraseñas no coinciden';
         }
     
-        $this->validate($rules, $messages);        
+        $this->validate($rules, $messages);
 
         $user = Auth::user();
 
