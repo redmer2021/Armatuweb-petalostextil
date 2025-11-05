@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 class Nuevousr extends Component
 {    
     public $verForm = false;
+    public $verFormCierre = false;
     public $verFormNuevoUsr = false;
     public $verFormRecuperarClave = false;
     public $verFormEditPerfil = false;
@@ -33,15 +34,19 @@ class Nuevousr extends Component
     public $txtNomApe;
     public $txtEmail;
     public $txtUserPasswordReing;
-    public $dirCalle;
-    public $dirAltura;
+    public $direccion;
     public $dirProvincia;
     public $dirLocalidad;
+    public $dirBarrio;
     public $dirCodPostal;
 
     // Mail de Recuperación de Clave
     public $txtEmailRecup;
 
+
+    public function VerCerrarSesion(){
+        $this->verFormCierre = true;
+    }
 
     public function VerLogin(){
         $this->verForm = true;
@@ -65,10 +70,10 @@ class Nuevousr extends Component
             ->where('idUser', $user->id)
              ->first();
             if ($tb_direc_envios) {
-                $this->dirCalle = $tb_direc_envios->calle;
-                $this->dirAltura = $tb_direc_envios->altura;
+                $this->direccion = $tb_direc_envios->direccion;
                 $this->dirProvincia = $tb_direc_envios->idProvincia;
                 $this->dirLocalidad = $tb_direc_envios->localidad;
+                $this->dirBarrio = $tb_direc_envios->barrio;
                 $this->dirCodPostal = $tb_direc_envios->codPostal;
             }
         }
@@ -78,22 +83,22 @@ class Nuevousr extends Component
     public function CancelarEditarPerfil(){
         $this->LimpiarCampos();
         $this->verFormEditPerfil = false;
+        $this->verForm = false;
+        $this->verFormCierre = false;
     }
 
     public function GrabarEditPerfil(){
 
         $rules = [
             'txtNomApe' => ['required'],
-            'dirCalle' => ['required'],
-            'dirAltura' => ['required'],
+            'direccion' => ['required'],
             'dirProvincia' => ['required', 'not_in:0'],
             'dirCodPostal' => ['required'],
         ];
     
         $messages = [
             'txtNomApe.required' => 'Debe ingresar su nombre y apellido',
-            'dirCalle.required' => 'Debe ingresar la calle',
-            'dirAltura.required' => 'Debe ingresar altura',
+            'direccion.required' => 'Debe ingresar Calle y altura',
             'dirProvincia.required' => 'Debe seleccionar una provincia',
             'dirProvincia.not_in' => 'Debe seleccionar una provincia válida',
             'dirCodPostal.required' => 'Debe ingresar Código Postal',
@@ -129,20 +134,20 @@ class Nuevousr extends Component
             ->update($updateData);
 
         // Verificar si existe dirección
-        $direccion = DB::table('tb_direc_envios')
+        $tb_direccion = DB::table('tb_direc_envios')
         ->where('idUser', $user->id)
         ->first();
         
 
-        if ($direccion) {
+        if ($tb_direccion) {
             // Actualizar registro existente
             DB::table('tb_direc_envios')
                 ->where('idUser', $user->id)
                 ->update([
-                    'calle' => $this->dirCalle,
-                    'altura' => $this->dirAltura,
+                    'direccion' => $this->direccion,
                     'idProvincia' => $this->dirProvincia,
                     'localidad' => $this->dirLocalidad,
+                    'barrio' => $this->dirBarrio,
                     'codPostal' => $this->dirCodPostal,
                     'updated_at' => now()
                 ]);
@@ -151,10 +156,10 @@ class Nuevousr extends Component
             DB::table('tb_direc_envios')->insert([
                 'idUser' => $user->id,
                 'tipDirec' => 1,
-                'calle' => $this->dirCalle,
-                'altura' => $this->dirAltura,
+                'direccion' => $this->direccion,
                 'idProvincia' => $this->dirProvincia,
                 'localidad' => $this->dirLocalidad,
+                'barrio' => $this->dirBarrio,
                 'codPostal' => $this->dirCodPostal,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -163,6 +168,8 @@ class Nuevousr extends Component
  
         $this->LimpiarCampos();
         $this->verFormEditPerfil = false;
+        $this->verForm = false;
+        $this->verFormCierre = false;
     }
 
 
@@ -242,8 +249,7 @@ class Nuevousr extends Component
             'txtEmail' => ['required', 'email', 'unique:users,email'],
             'txtUserPassword' => ['required'],
             'txtUserPasswordReing' => ['required', 'same:txtUserPassword'],
-            'dirCalle' => ['required'],
-            'dirAltura' => ['required'],
+            'direccion' => ['required'],
             'dirProvincia' => ['required', 'not_in:0'],
             'dirCodPostal' => ['required'],
         ], [
@@ -254,8 +260,7 @@ class Nuevousr extends Component
             'txtUserPassword.required' => 'Debe ingresar Contraseña',
             'txtUserPasswordReing.required' => 'Debe reingresar la contraseña',
             'txtUserPasswordReing.same' => 'Las contraseñas no coinciden',
-            'dirCalle.required' => 'Debe ingresar la calle',
-            'dirAltura.required' => 'Debe ingresar altura',
+            'direccion.required' => 'Debe ingresar la Calle y altura',
             'dirProvincia.required' => 'Debe seleccionar una provincia',
             'dirProvincia.not_in' => 'Debe seleccionar una provincia válida',            
             'dirCodPostal.required' => 'Debe ingresar Código Postal',
@@ -282,9 +287,9 @@ class Nuevousr extends Component
             DB::table('tb_direc_envios')->insert([
                 'idUser' => $idUser,
                 'tipDirec' => 1, // 1: Dirección principal
-                'calle' => $this->dirCalle,
-                'altura' => $this->dirAltura,
+                'direccion' => $this->direccion,
                 'localidad' => $this->dirLocalidad ?? '',
+                'barrio' => $this->dirBarrio ?? '',
                 'idProvincia' => $this->dirProvincia,
                 'codPostal' => $this->dirCodPostal,
                 'created_at' => now(),
@@ -292,8 +297,8 @@ class Nuevousr extends Component
             ]);
 
             //disparar mail para validar cuenta
-            $url = url('activar-cta/' . $activationToken);
-            Mail::to($this->txtEmail)->send(new ActivarCuentaMail($this->txtNomApe, $url));            
+            //$url = url('activar-cta/' . $activationToken);
+            //Mail::to($this->txtEmail)->send(new ActivarCuentaMail($this->txtNomApe, $url));            
 
             DB::commit();
             $this->LimpiarCampos();
@@ -323,10 +328,10 @@ class Nuevousr extends Component
                 'txtEmail',
                 'txtUserPassword',
                 'txtUserPasswordReing',
-                'dirCalle',
-                'dirAltura',
+                'direccion',
                 'dirProvincia',
                 'dirLocalidad',
+                'dirBarrio',
                 'dirCodPostal',
             ]);
         $this->resetErrorBag();
@@ -371,11 +376,11 @@ class Nuevousr extends Component
                 'credNoValidas' => 'Las credenciales ingresadas son incorrectas. Acceso Denegado'
             ]);
         }
-
     }
 
     public function CerrarSesion(){
         Auth::logout();
+        $this->verFormCierre=false;
     }
 
 

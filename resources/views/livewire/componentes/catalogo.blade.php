@@ -104,9 +104,11 @@
                             <img src="{{ asset('imgs/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
                             <span class="font-bold text-md ml-2">Envío a domicilio</span>
                         </div>
-                        <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center">
+                        <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center mb-1">
                             <span class="text-md" >Por Correo Argentino</span>
-                            <span>$ 9,350.00</span>
+                        </div>
+                        <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center">
+                            <span class="text-md" >Solo en CABA - Moto</span>
                         </div>
                     </div>
                     <div class="pl-2 my-[2rem] flex items-center bg-[#FEF0E9]">

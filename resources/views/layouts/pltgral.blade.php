@@ -24,9 +24,9 @@
 
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
         @livewireStyles
-        @stack('styles') {{-- 🔹 permite que otros componentes agreguen estilos --}}        
+        @stack('styles') {{-- 🔹 permite que otros componentes agreguen estilos --}}
     </head>
-    <body>
+    <body class="body1">
         @yield('contenidosPrincipales')
 
         {{-- 🔹 Scripts globales --}}

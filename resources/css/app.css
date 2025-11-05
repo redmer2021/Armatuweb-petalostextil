@@ -10,6 +10,12 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+.body1 {
+    background-image: url('../../public/imgs/fondo-body.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
 .ventanaModal {
     @apply 
         fixed 
@@ -87,4 +93,72 @@
         p-[0.5rem] md:p-[2rem];
 }
 
+.ventanaInterna_6{
+    @apply 
+        w-[98%] md:w-[25%] 
+        bg-[#FEF0E9] 
+        m-auto 
+        p-[0.5rem] md:p-[2.5rem]
+        overflow-x-hidden;
+}
 
+
+.btn-uno {
+    @apply 
+        bg-[#5D7857] 
+        hover:bg-[#405D39] 
+        transition-colors 
+        duration-200 
+        px-4 
+        py-2 
+        cursor-pointer 
+        text-white;
+  }
+
+.grillas-celdas-1{
+    @apply 
+        bg-gray-400 
+        rounded-md 
+        text-white 
+        font-bold 
+        text-[14px] 
+        flex
+        justify-center
+        items-center
+        text-center
+        whitespace-nowrap 
+        overflow-hidden 
+        text-ellipsis
+        px-2 
+        py-1;
+}
+
+.grillas-celdas-2{
+    @apply 
+        flex
+        bg-gray-200
+        rounded-md 
+        text-black
+        font-normal
+        text-[12px] 
+        px-2 
+        whitespace-nowrap 
+        overflow-hidden 
+        text-ellipsis
+        py-1;
+}
+
+.grillas-celdas-3 {
+    @apply 
+      flex
+      bg-gray-200
+      rounded-md 
+      text-black
+      font-normal
+      text-[12px] 
+      px-2 
+      py-1
+      break-words
+      whitespace-normal
+      overflow-hidden; 
+  }

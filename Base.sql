@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 
 DELETE FROM `sessions`;
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('6wyowssWzc7g8OD7wd5D9D7tMiLXQZfQwXnKEgFg', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoialdLeHVQejM2ZDVENGpEWFYzbG9iOE1UaktaS1FTcXJvTVVsSk5wSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1761769368);
+	('ucgwLL6SjqQvmXo3vxtJQOl20D6cb5eLMRw93qOQ', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiaFJtUmcxcFBydjUzTUQxeWwxZXQ4ajdHb0s5cXBCYW5CNkdYdW5TeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYW5lbERlQ29udHJvbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1762289147);
 
 CREATE TABLE IF NOT EXISTS `tb_articulos` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -124,17 +124,18 @@ CREATE TABLE IF NOT EXISTS `tb_articulos` (
   `descPorTransfer` tinyint DEFAULT NULL,
   `stockActual` tinyint DEFAULT NULL,
   `visitas` int DEFAULT NULL,
+  `pausado` tinyint DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_articulos`;
-INSERT INTO `tb_articulos` (`id`, `codigo`, `categoria`, `nombre`, `descrip`, `compoKit`, `caracDest`, `usosRec`, `notas`, `medidas`, `peso`, `cuotas`, `precio`, `descPorTransfer`, `stockActual`, `visitas`, `created_at`, `updated_at`) VALUES
-	(1, 'ASD124', 1, 'Flores de Japón', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 10, 1412, '2025-09-10 20:09:02', '2025-09-10 20:09:02'),
-	(2, 'FDS100', 1, 'Almendrado', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 25, 500, '2025-09-10 20:10:33', '2025-09-10 20:10:34'),
-	(3, 'SDK123', 2, 'Repasadores nido de avejas - pack x 4', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.    ', NULL, NULL, NULL, NULL, '50 cm x 67 cm', '40 g', NULL, 10000.00, 25, 5, 1125, '2025-09-10 20:12:12', '2025-09-10 20:12:13'),
-	(4, 'KJD333', 3, 'Toallón con capucha - Espacial', 'TOALLÓN CON CAPUCHA + 2 TOALLITAS DE MANO – 100% ALGODÓN DOBLE FELPA\r\nIdeal para la rutina diaria de tu bebé. Combina suavidad, comodidad y funcionalidad en un solo producto. Perfecto para usar en casa, en el jardín o llevar en el bolso.\r\n', '- 1 toallón con capucha – Medida: 80 x 80 cm\r\nConfeccionado en algodón doble felpa ultra absorbente. Su capucha lo hace ideal para envolver al bebé luego del baño, manteniéndolo seco y abrigado.\r\n\r\n- 2 toallitas de mano – Medida: 30 x 40 cm\r\nPrácticas para llevar al jardín, usar como pañito multiuso o tener siempre a mano en el bolso del bebé.\r\n\r\nConfeccionado en algodón doble felpa 100%, extra suave al tacto, con excelente absorción y durabilidad.', 'Algodón 100% doble felpa: extra suave al tacto y de gran absorción.\r\nCosturas reforzadas para mayor durabilidad.\r\nNo pierde suavidad con los lavados.\r\nApto para lavarropas.\r\nEstampados infantiles con motivos delicados y colores suaves.\r\nConsultá disponibilidad al momento de comprar para elegir tu diseño preferido.\r\n', '- Bebés recién nacidos y niños pequeños.\r\n- Salida del baño.\r\n- Jardín maternal.\r\n- Regalo de nacimiento o baby shower.', 'El color del producto puede variar levemente en relación con la imagen, debido a la iluminación y la partida del tejido.\r\nLa imágenes son a modo de ilustración. ', '80 cm x 80 cm', '240 g', '6 cuotas sin interés de 3,666.66', 24000.00, 25, 100, 41, '2025-09-10 20:13:41', '2025-09-10 20:13:41');
+INSERT INTO `tb_articulos` (`id`, `codigo`, `categoria`, `nombre`, `descrip`, `compoKit`, `caracDest`, `usosRec`, `notas`, `medidas`, `peso`, `cuotas`, `precio`, `descPorTransfer`, `stockActual`, `visitas`, `pausado`, `created_at`, `updated_at`) VALUES
+	(1, 'ASD124', 1, 'Flores de Japón', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 10, 1414, 1, '2025-09-10 20:09:02', '2025-09-10 20:09:02'),
+	(2, 'FDS100', 1, 'Almendrado', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 25, 501, 2, '2025-09-10 20:10:33', '2025-09-10 20:10:34'),
+	(3, 'SDK123', 2, 'Repasadores nido de avejas - pack x 4', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.    ', NULL, NULL, NULL, NULL, '50 cm x 67 cm', '40 g', NULL, 10000.00, 25, 5, 1125, 2, '2025-09-10 20:12:12', '2025-09-10 20:12:13'),
+	(4, 'KJD333', 3, 'Toallón con capucha - Espacial', 'TOALLÓN CON CAPUCHA + 2 TOALLITAS DE MANO – 100% ALGODÓN DOBLE FELPA\r\nIdeal para la rutina diaria de tu bebé. Combina suavidad, comodidad y funcionalidad en un solo producto. Perfecto para usar en casa, en el jardín o llevar en el bolso.\r\n', '- 1 toallón con capucha – Medida: 80 x 80 cm\r\nConfeccionado en algodón doble felpa ultra absorbente. Su capucha lo hace ideal para envolver al bebé luego del baño, manteniéndolo seco y abrigado.\r\n\r\n- 2 toallitas de mano – Medida: 30 x 40 cm\r\nPrácticas para llevar al jardín, usar como pañito multiuso o tener siempre a mano en el bolso del bebé.\r\n\r\nConfeccionado en algodón doble felpa 100%, extra suave al tacto, con excelente absorción y durabilidad.', 'Algodón 100% doble felpa: extra suave al tacto y de gran absorción.\r\nCosturas reforzadas para mayor durabilidad.\r\nNo pierde suavidad con los lavados.\r\nApto para lavarropas.\r\nEstampados infantiles con motivos delicados y colores suaves.\r\nConsultá disponibilidad al momento de comprar para elegir tu diseño preferido.\r\n', '- Bebés recién nacidos y niños pequeños.\r\n- Salida del baño.\r\n- Jardín maternal.\r\n- Regalo de nacimiento o baby shower.', 'El color del producto puede variar levemente en relación con la imagen, debido a la iluminación y la partida del tejido.\r\nLa imágenes son a modo de ilustración. ', '80 cm x 80 cm', '240 g', '6 cuotas sin interés de 3,666.66', 24000.00, 25, 100, 43, 1, '2025-09-10 20:13:41', '2025-09-10 20:13:41');
 
 CREATE TABLE IF NOT EXISTS `tb_carrito` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `tb_carrito` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_carrito`;
 INSERT INTO `tb_carrito` (`id`, `guidCarrito`, `idArticulo`, `cantidad`, `precioUnit`, `estado`, `created_at`, `updated_at`) VALUES
@@ -161,7 +162,10 @@ INSERT INTO `tb_carrito` (`id`, `guidCarrito`, `idArticulo`, `cantidad`, `precio
 	(63, '6a70a6b3-eb8b-47a8-bef4-ae47ecfcd28f', 2, 1, 42500.00, 1, '2025-10-29 20:16:37', '2025-10-29 20:19:09'),
 	(64, '6a70a6b3-eb8b-47a8-bef4-ae47ecfcd28f', 1, 1, 42500.00, 0, '2025-10-29 20:19:08', '2025-10-29 20:19:08'),
 	(65, 'c7cf3427-8c13-49d2-b2f4-af8647a3c511', 1, 2, 42500.00, 1, '2025-10-29 20:19:34', '2025-10-29 20:22:00'),
-	(66, 'c7cf3427-8c13-49d2-b2f4-af8647a3c511', 4, 3, 24000.00, 1, '2025-10-29 20:21:15', '2025-10-29 20:22:00');
+	(66, 'c7cf3427-8c13-49d2-b2f4-af8647a3c511', 4, 3, 24000.00, 1, '2025-10-29 20:21:15', '2025-10-29 20:22:00'),
+	(68, 'a9885d46-c417-413d-ab93-1826bb1ad98f', 2, 3, 42500.00, 1, '2025-11-03 14:08:23', '2025-11-03 14:13:04'),
+	(69, 'a9885d46-c417-413d-ab93-1826bb1ad98f', 4, 1, 24000.00, 1, '2025-11-03 14:11:52', '2025-11-03 14:12:20'),
+	(70, '45d10d22-7e82-4825-85bb-9c2ee030d530', 3, 1, 10000.00, 1, '2025-11-03 14:13:18', '2025-11-03 15:08:22');
 
 CREATE TABLE IF NOT EXISTS `tb_categorias` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -187,28 +191,29 @@ CREATE TABLE IF NOT EXISTS `tb_direc_envios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idUser` bigint DEFAULT NULL,
   `tipDirec` tinyint DEFAULT NULL,
-  `calle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `altura` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `localidad` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `barrio` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `idProvincia` tinyint DEFAULT NULL,
   `codPostal` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_direc_envios`;
-INSERT INTO `tb_direc_envios` (`id`, `idUser`, `tipDirec`, `calle`, `altura`, `localidad`, `idProvincia`, `codPostal`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, 'Antonio Machado', '558', 'CABA', 24, '1405', '2025-10-02 18:02:43', '2025-10-02 18:03:39'),
-	(3, 3, 1, 'Antonio Machado', '558', 'Caballito', 24, '1405', '2025-10-15 14:49:58', '2025-10-15 14:49:58');
+INSERT INTO `tb_direc_envios` (`id`, `idUser`, `tipDirec`, `direccion`, `localidad`, `barrio`, `idProvincia`, `codPostal`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 'Antonio Machado', 'CABA', '558', 24, '1405', '2025-10-02 18:02:43', '2025-10-02 18:03:39'),
+	(3, 3, 1, 'Antonio Machado 558', 'Caballito', 'Caballito', 24, '1405', '2025-10-15 14:49:58', '2025-11-03 17:23:30'),
+	(6, 6, 1, 'Calle y altura - editado', '', 'Caballito - editado', 24, '1405', '2025-11-03 14:46:40', '2025-11-03 14:48:00');
 
 CREATE TABLE IF NOT EXISTS `tb_envios_pendientes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `guidCarrito` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dirCalle` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dirAltura` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dirCalleAltura` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dirProvincia` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dirLocalidad` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dirBarrio` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dirCodPostal` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dirEntreCalles` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `estado` tinyint DEFAULT NULL,
@@ -216,12 +221,15 @@ CREATE TABLE IF NOT EXISTS `tb_envios_pendientes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_envios_pendientes`;
-INSERT INTO `tb_envios_pendientes` (`id`, `guidCarrito`, `dirCalle`, `dirAltura`, `dirProvincia`, `dirLocalidad`, `dirCodPostal`, `dirEntreCalles`, `estado`, `enviarPor`, `created_at`, `updated_at`) VALUES
-	(1, '615cc623-d6ba-4498-a627-73a777a24138', 'Antonio Machado', '558', 'buenos aires', 'Caballito', '1405', 'Ambroseti y Acoyte', 0, 1, '2025-10-29 16:50:03', '2025-10-29 16:50:03'),
-	(2, '615cc623-d6ba-4498-a627-73a777a24138', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 0, 1, '2025-10-29 16:55:24', '2025-10-29 16:55:24');
+INSERT INTO `tb_envios_pendientes` (`id`, `guidCarrito`, `dirCalleAltura`, `dirProvincia`, `dirLocalidad`, `dirBarrio`, `dirCodPostal`, `dirEntreCalles`, `estado`, `enviarPor`, `created_at`, `updated_at`) VALUES
+	(1, '615cc623-d6ba-4498-a627-73a777a24138', 'Antonio Machado', 'buenos aires', 'Caballito', NULL, '1405', 'Ambroseti y Acoyte', 0, 1, '2025-10-29 16:50:03', '2025-10-29 16:50:03'),
+	(2, '615cc623-d6ba-4498-a627-73a777a24138', 'uno', 'tres', 'cuatro', NULL, 'cinco', 'seis', 0, 1, '2025-10-29 16:55:24', '2025-10-29 16:55:24'),
+	(3, 'a9885d46-c417-413d-ab93-1826bb1ad98f', 'Antonio Machado 558', '1', 'Caballito', '', '1405', '', 0, 1, '2025-11-03 11:11:24', '2025-11-03 11:11:24'),
+	(4, 'a9885d46-c417-413d-ab93-1826bb1ad98f', 'Antonio Machado 558', '24', '', 'Caballito', '1405', '', 0, 2, '2025-11-03 11:12:20', '2025-11-03 11:12:20'),
+	(5, '45d10d22-7e82-4825-85bb-9c2ee030d530', 'Calle y altura - editado', '24', '', 'Caballito - editado', '1405', 'RS - Editado', 0, 2, '2025-11-03 12:08:22', '2025-11-03 12:08:22');
 
 CREATE TABLE IF NOT EXISTS `tb_fotos` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -254,37 +262,38 @@ INSERT INTO `tb_fotos` (`id`, `id_articulo`, `nro_foto`, `nomFoto`, `created_at`
 CREATE TABLE IF NOT EXISTS `tb_provincias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `impoEnvio` decimal(20,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_provincias`;
-INSERT INTO `tb_provincias` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'BUENOS AIRES', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(2, 'CATAMARCA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(3, 'CÓRDOBA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(4, 'CORRIENTES', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(5, 'CHACO', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(6, 'CHUBUT', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(7, 'ENTRE RIOS', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(8, 'FORMOSA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(9, 'JUJUY', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(10, 'LA PAMPA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(11, 'LA RIOJA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(12, 'MENDOZA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(13, 'MISIONES', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(14, 'NEUQUEN', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(15, 'RIO NEGRO', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(16, 'SALTA', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(17, 'SAN JUAN', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(18, 'SAN LUIS', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(19, 'SANTA CRUZ', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(20, 'SANTA FE', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(21, 'SANTIAGO DEL ESTERO', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(22, 'TIERRA DEL FUEGO', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(23, 'TUCUMÁN', '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
-	(24, 'CIUDAD DE BUENOS AIRES', '2021-05-02 00:39:48', '2021-05-02 00:39:48');
+INSERT INTO `tb_provincias` (`id`, `nombre`, `impoEnvio`, `created_at`, `updated_at`) VALUES
+	(1, 'BUENOS AIRES', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(2, 'CATAMARCA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(3, 'CÓRDOBA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(4, 'CORRIENTES', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(5, 'CHACO', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(6, 'CHUBUT', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(7, 'ENTRE RIOS', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(8, 'FORMOSA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(9, 'JUJUY', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(10, 'LA PAMPA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(11, 'LA RIOJA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(12, 'MENDOZA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(13, 'MISIONES', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(14, 'NEUQUEN', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(15, 'RIO NEGRO', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(16, 'SALTA', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(17, 'SAN JUAN', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(18, 'SAN LUIS', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(19, 'SANTA CRUZ', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(20, 'SANTA FE', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(21, 'SANTIAGO DEL ESTERO', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(22, 'TIERRA DEL FUEGO', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(23, 'TUCUMÁN', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48'),
+	(24, 'CIUDAD DE BUENOS AIRES', 1000.00, '2021-05-02 00:39:48', '2021-05-02 00:39:48');
 
 CREATE TABLE IF NOT EXISTS `tb_suscriptores` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -315,15 +324,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `validation_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `validation_expires` datetime DEFAULT NULL,
   `estado` tinyint unsigned DEFAULT NULL,
+  `rol` tinyint unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `users`;
-INSERT INTO `users` (`id`, `name`, `email`, `nomApe`, `telefonos`, `email_verified_at`, `password`, `remember_token`, `activation_token`, `validation_token`, `validation_expires`, `estado`, `created_at`, `updated_at`) VALUES
-	(3, 'Rene Daniel Merlo', 'rmerlo@gmail.com', 'Rene Daniel Merlo', NULL, NULL, '$2y$12$Q.yKq40ZDwan0XVg0LM3fu8BoEP.x7Nl6PkU1UQjz1G7JBZTwbM.e', NULL, '', NULL, NULL, 1, '2025-10-15 14:49:57', '2025-10-15 14:49:57');
+INSERT INTO `users` (`id`, `name`, `email`, `nomApe`, `telefonos`, `email_verified_at`, `password`, `remember_token`, `activation_token`, `validation_token`, `validation_expires`, `estado`, `rol`, `created_at`, `updated_at`) VALUES
+	(3, 'Rene Daniel Merlo', 'rmerlo@gmail.com', 'Rene Daniel Merlo', NULL, NULL, '$2y$12$Q.yKq40ZDwan0XVg0LM3fu8BoEP.x7Nl6PkU1UQjz1G7JBZTwbM.e', NULL, '', NULL, NULL, 1, 2, '2025-10-15 14:49:57', '2025-11-03 17:23:30'),
+	(6, 'rdm', 'rdm@gmail.com', 'rdm', NULL, NULL, '$2y$12$hFmyCNtazuIjWMZ/VZPG9etnUsh5upjgmhw2KzGUkuw7shJ2ziQ12', NULL, '', NULL, NULL, 1, 1, '2025-11-03 14:46:40', '2025-11-03 14:48:00');
 
 CREATE TABLE `vta_carrito` (
 	`id` INT NOT NULL,
@@ -342,6 +353,7 @@ CREATE TABLE `vta_catalogo` (
 	`id` INT NOT NULL,
 	`codigo` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
 	`categoria` TINYINT UNSIGNED NULL,
+	`nomCategoria` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
 	`nombre` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
 	`precio` DECIMAL(20,2) NULL,
 	`nomFoto` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
@@ -355,7 +367,8 @@ CREATE TABLE `vta_catalogo` (
 	`usosRec` LONGTEXT NULL COLLATE 'utf8mb4_unicode_ci',
 	`medidas` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
 	`peso` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
-	`notas` LONGTEXT NULL COLLATE 'utf8mb4_unicode_ci'
+	`notas` LONGTEXT NULL COLLATE 'utf8mb4_unicode_ci',
+	`pausado` TINYINT NULL
 );
 
 CREATE TABLE `vta_foto_principal` (
@@ -372,7 +385,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ;
 
 DROP TABLE IF EXISTS `vta_catalogo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vta_catalogo` AS select `a`.`id` AS `id`,`a`.`codigo` AS `codigo`,`a`.`categoria` AS `categoria`,`a`.`nombre` AS `nombre`,`a`.`precio` AS `precio`,`b`.`nomFoto` AS `nomFoto`,`a`.`cuotas` AS `cuotas`,`a`.`descPorTransfer` AS `descPorTransfer`,`a`.`stockActual` AS `stockActual`,`a`.`visitas` AS `visitas`,`a`.`descrip` AS `descrip`,`a`.`compoKit` AS `compoKit`,`a`.`caracDest` AS `caracDest`,`a`.`usosRec` AS `usosRec`,`a`.`medidas` AS `medidas`,`a`.`peso` AS `peso`,`a`.`notas` AS `notas` from (`tb_articulos` `a` join `vta_foto_principal` `b` on((`a`.`id` = `b`.`id_articulo`)))
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vta_catalogo` AS select `a`.`id` AS `id`,`a`.`codigo` AS `codigo`,`a`.`categoria` AS `categoria`,`c`.`nombre` AS `nomCategoria`,`a`.`nombre` AS `nombre`,`a`.`precio` AS `precio`,`b`.`nomFoto` AS `nomFoto`,`a`.`cuotas` AS `cuotas`,`a`.`descPorTransfer` AS `descPorTransfer`,`a`.`stockActual` AS `stockActual`,`a`.`visitas` AS `visitas`,`a`.`descrip` AS `descrip`,`a`.`compoKit` AS `compoKit`,`a`.`caracDest` AS `caracDest`,`a`.`usosRec` AS `usosRec`,`a`.`medidas` AS `medidas`,`a`.`peso` AS `peso`,`a`.`notas` AS `notas`,`a`.`pausado` AS `pausado` from ((`tb_articulos` `a` join `vta_foto_principal` `b` on((`a`.`id` = `b`.`id_articulo`))) join `tb_categorias` `c` on((`a`.`categoria` = `c`.`id`)))
 ;
 
 DROP TABLE IF EXISTS `vta_foto_principal`;

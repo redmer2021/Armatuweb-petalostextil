@@ -14,6 +14,8 @@ Route::get('Producto/{id}', [CatalogoController::class, 'Producto'])->name('Prod
 Route::get('activar-cta/{token}', [UsuariosController::class, 'activar_cuenta']);
 Route::get('recuperar-cta/{token}', [UsuariosController::class, 'recuperar_cta']);
 
+Route::get('logAdmin', [UsuariosController::class, 'logAdmin']);
+Route::get('panelDeControl', [UsuariosController::class, 'panelDeControl']);
 
 Route::get('/clear-cache/{key}', function ($key) {
     if ($key !== env('CACHE_KEY')) {

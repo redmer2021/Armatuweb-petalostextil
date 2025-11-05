@@ -118,6 +118,12 @@ class Catalogo extends Component
     public function IniciarCompra($id){
         $this->cantItemsComprados = 1;
         $this->verForm=true;
+
+        // 🔹 Incrementar las visitas del artículo
+        DB::table('tb_articulos')
+            ->where('id', $id)
+            ->increment('visitas');
+
         $articulo = DB::table('vta_catalogo')
             ->where('id', $id)
             ->first();
@@ -143,6 +149,7 @@ class Catalogo extends Component
             $this->item_medidas = $articulo->medidas;
             $this->item_peso = $articulo->peso;
             $this->item_notas = $articulo->notas;
+
         }
     }
 

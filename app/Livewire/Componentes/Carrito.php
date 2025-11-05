@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Componentes;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
@@ -48,6 +49,20 @@ class Carrito extends Component
             'tipEnvio',
             'tipPago'
         ]);
+
+        if (Auth::check()){
+            $direcEnvios = DB::table('tb_direc_envios')
+            ->where('idUser', Auth::user()->id)
+            ->first();
+            if ($direcEnvios){
+                $this->dirCalleAltura = $direcEnvios->direccion;
+                $this->dirProvincia = $direcEnvios->idProvincia;
+                $this->dirLocalidad = $direcEnvios->localidad;
+                $this->dirBarrio = $direcEnvios->barrio;
+                $this->dirCodPostal = $direcEnvios->codPostal;
+            }
+        }
+
         $this->verForm = true;
     }
 
@@ -79,14 +94,6 @@ class Carrito extends Component
     public function updatedTipEnvio()
     {
         $this->resetErrorBag();
-        $this->reset([
-            'dirCalleAltura',
-            'dirProvincia',
-            'dirLocalidad',
-            'dirBarrio',
-            'dirCodPostal',
-            'dirEntreCalles'
-        ]);
 
         $this->recalcularTotal();
     }
@@ -128,7 +135,6 @@ class Carrito extends Component
         }
 
     }
-
 
     public function IniciarPago1(){
         try{

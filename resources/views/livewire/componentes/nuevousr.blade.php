@@ -1,11 +1,14 @@
 <div>
     <div>
-        <div class="flex flex-col items-center cursor-pointer">
+        <div class="flex items-center cursor-pointer">
             @if(Auth::check())
                 <!-- Usuario logueado -->
-                <img src="{{ asset('imgs/userNuevo.png') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2rem] w-auto">
-                <span wire:click="EditarPerfil()" class="hover:underline text-[10px] md:text-xs">Perfil: {{ Auth::user()->nomApe }}</span>
-                <span wire:click="CerrarSesion()" class="hover:underline text-[10px] md:text-xs">Cerrar Sesión</span>
+                <img wire:click="VerCerrarSesion()" src="{{ asset('imgs/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2rem] w-auto">
+                <div class="flex flex-col ml-2">
+                    <span wire:click="EditarPerfil()" class="hover:underline md:text-[16px] hidden md:flex font-bold">{{ Auth::user()->nomApe }}</span>
+                    <span wire:click="CerrarSesion()" class="hover:underline md:text-[16px] hidden md:flex">Cerrar Sesión</span>
+                </div>
+
             @else
                 <!-- Usuario no logueado -->
                 <div wire:click="VerLogin()" class="hover:underline flex cursor-pointer">
@@ -17,7 +20,26 @@
                 </div>
             @endif
         </div>
-    
+
+        
+        <!-- Formulario para Cierre de Sesión - Edición de Perfil -->
+        <section 
+            class="ventanaModal" 
+            x-cloak 
+            x-show="$wire.verFormCierre" 
+            x-transition.duration.0ms
+            x-effect="document.body.classList.toggle('overflow-hidden', $wire.verFormCierre)"
+        >
+            <div class="ventanaInterna_3">
+                @if(Auth::check())
+                    <span class="block text-center text-3xl md:text-4xl font-bold mb-[2rem]" >{{ Auth::user()->nomApe }}</span>
+                @endif
+                <button wire:click="CerrarSesion()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 py-2 text-white cursor-pointer w-full mb-[2rem]">Cerrar Sesión</button>
+                <button wire:click="EditarPerfil()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 py-2 text-white px-4  cursor-pointer w-full mb-[2rem]">Editar Perfil</button>
+            </div>
+        </section>
+
+
         <!-- Formulario para Inicio de Sesión -->
         <section 
             class="ventanaModal" 
@@ -40,8 +62,8 @@
                     </div>
                 </div>
                 <div class="flex justify-center space-x-3">
-                    <button wire:click.stop="CancelarLogin()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cancelar</button>
-                    <button wire:click.stop="Login()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Iniciar Sesión</button>
+                    <button wire:click.stop="CancelarLogin()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 px-4 py-2 cursor-pointer text-white ">Cancelar</button>
+                    <button wire:click.stop="Login()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 px-4 cursor-pointer text-white ">Iniciar Sesión</button>
                 </div>
                 <div class="my-4 flex justify-end">
                     <button wire:click.stop="NuevoUsuario()" class="text-xs underline cursor-pointer">¿No tenes una cuenta aún? Crear una desde acá</button>
@@ -98,13 +120,9 @@
                 <div class="mt-[1rem]">
                     <span class="text-xs font-bold">Dirección principal para recibir tus compras</span>
                     <div class="grid grid-cols-12 gap-3">
-                        <div class="col-span-9">
-                            <label class="text-xs" for="dirCalle1">Calle</label>
-                            <input id="dirCalle1" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
-                        </div>
-                        <div class="col-span-3">
-                            <label class="text-xs" for="dirAltura1">Altura</label>
-                            <input id="dirAltura1" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
+                        <div class="col-span-12">
+                            <label class="text-xs" for="direccion1">Dirección</label>
+                            <input id="direccion1" wire:model="direccion" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('direccion') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle y altura...">
                         </div>
 
                         <div class="col-span-12 md:col-span-5">
@@ -116,19 +134,23 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-span-8 md:col-span-5">
+                        <div class="col-span-8 md:col-span-7">
                             <label class="text-xs" for="dirLocalidad1">Localidad</label>
                             <input id="dirLocalidad1" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
                         </div>
-                        <div class="col-span-4 md:col-span-2">
+                        <div class="col-span-8 md:col-span-8">
+                            <label class="text-xs" for="dirBarrio1">Barrio</label>
+                            <input id="dirBarrio1" wire:model="dirBarrio" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
+                        </div>
+                        <div class="col-span-4 md:col-span-4">
                             <label class="text-xs" for="dirCodPostal1">Código Postal</label>
                             <input id="dirCodPostal1" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
                         </div>
                     </div>
 
                     <div class="mt-[2rem] flex justify-end space-x-2">
-                        <button wire:click.stop="CancelarNuevoUsuario()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cancelar</button>
-                        <button wire:click.stop="GrabarNuevoUsuario()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Generar Nuevo Usuario</button>
+                        <button wire:click.stop="CancelarNuevoUsuario()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Cancelar</button>
+                        <button wire:click.stop="GrabarNuevoUsuario()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Generar Nuevo Usuario</button>
                     </div>
     
                 </div>
@@ -179,13 +201,9 @@
                 <div class="mt-[1rem]">
                     <span class="text-xs font-bold">Dirección principal para recibir tus compras</span>
                     <div class="grid grid-cols-12 gap-3">
-                        <div class="col-span-9">
-                            <label class="text-xs" for="dirCalle2">Calle</label>
-                            <input id="dirCalle2" wire:model="dirCalle" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle...">
-                        </div>
-                        <div class="col-span-3">
-                            <label class="text-xs" for="dirAltura2">Altura</label>
-                            <input id="dirAltura2" wire:model="dirAltura" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="altura...">
+                        <div class="col-span-12">
+                            <label class="text-xs" for="direccion2">Dirección</label>
+                            <input id="direccion2" wire:model="direccion" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('direccion') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Calle y altura...">
                         </div>
 
                         <div class="col-span-12 md:col-span-5">
@@ -197,19 +215,23 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-span-8 md:col-span-5">
+                        <div class="col-span-8 md:col-span-7">
                             <label class="text-xs" for="dirLocalidad2">Localidad</label>
                             <input id="dirLocalidad2" wire:model="dirLocalidad" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Localidad...">
                         </div>
-                        <div class="col-span-4 md:col-span-2">
+                        <div class="col-span-8 md:col-span-8">
+                            <label class="text-xs" for="dirBarrio2">Barrio</label>
+                            <input id="dirBarrio2" wire:model="dirBarrio" type="text" class="block w-full px-2 py-2 text-md border-[1px] border-gray-400 focus:outline-none focus:ring-0" placeholder="Barrio...">
+                        </div>
+                        <div class="col-span-4 md:col-span-4">
                             <label class="text-xs" for="dirCodPostal2">Código Postal</label>
                             <input id="dirCodPostal2" wire:model="dirCodPostal" type="text" class="block w-full px-2 py-2 text-md border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0" placeholder="Cod. Postal...">
                         </div>
                     </div>
 
                     <div class="mt-[2rem] flex justify-end space-x-2">
-                        <button wire:click.stop="CancelarEditarPerfil()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cancelar</button>
-                        <button wire:click.stop="GrabarEditPerfil()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Grabar Datos</button>
+                        <button wire:click.stop="CancelarEditarPerfil()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Cancelar</button>
+                        <button wire:click.stop="GrabarEditPerfil()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Grabar Datos</button>
                     </div>
     
                 </div>
@@ -241,8 +263,8 @@
                         <p class="text-red-500 text-xs mt-[1rem] mb-[1rem]">{{ $message }}</p>                        
                     @enderror
                     <div class="flex justify-center space-x-3">
-                        <button wire:click.stop="CancelarEnlaceRecup()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cancelar</button>
-                        <button wire:click.stop="GenerarEnlaceRecup()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Recuperar Contraseña</button>
+                        <button wire:click.stop="CancelarEnlaceRecup()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Cancelar</button>
+                        <button wire:click.stop="GenerarEnlaceRecup()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Recuperar Contraseña</button>
                     </div>
                 </div>
                 
@@ -269,7 +291,7 @@
                 <p class="mb-[1rem]">Se ha enviado un Email a la cuenta: {{ $txtEmailRecup }}</p>
                 <p class="mb-[1rem]">Por favor, revisa tu Email y confirma la activación de esta cuenta</p>
                 <div class="flex justify-end">
-                    <button wire:click.stop="CerrarMsg1()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cerrar</button>
+                    <button wire:click.stop="CerrarMsg1()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Cerrar</button>
                 </div>
             </div>
 
@@ -288,7 +310,7 @@
                 <p class="mb-[1rem]">Se ha enviado un Email a la cuenta: {{ $txtEmailRecup }}</p>
                 <p class="mb-[1rem]">Por favor, revisa tu Email y sigue las instrucciones para recuperar tu Contraseña</p>
                 <div class="flex justify-end">
-                    <button wire:click.stop="CerrarMsg2()" class="bg-black px-4 py-2 rounded-md cursor-pointer text-white ">Cerrar</button>
+                    <button wire:click.stop="CerrarMsg2()" class="bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200  px-4 py-2 cursor-pointer text-white">Cerrar</button>
                 </div>
             </div>
 

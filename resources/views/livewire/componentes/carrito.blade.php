@@ -136,51 +136,6 @@
 
                                     </div>
                                 </div>
-                                {{-- <div class="px-3 py-2 border border-[#E9E9E9] rounded-md ">
-                                    <div class="flex justify-between">
-                                        <div class="flex items-center">
-                                            <input class="cursor-pointer mr-2" wire:model.live="tipEnvio" value="1" id="op1" type="radio" name="tipEnvio">
-                                            <label for="op1" class="cursor-pointer text-xs">Correo Argentino</label>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <div class="flex items-center">
-                                            <input class="cursor-pointer mr-2" wire:model.live="tipEnvio" value="2" id="op2" type="radio" name="tipEnvio">
-                                            <label for="op2" class="cursor-pointer text-xs">Moto solo en CABA</label>
-                                        </div>
-                                        @if ($tipEnvio == 2)
-                                            <div>
-                                                <div class="mt-[1rem] grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label for="dirCalle" class="text-xs">Calle</label>
-                                                    <input id="dirCalle" maxlength="50" wire:model="dirCalle" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirCalle') border-red-500 @else border-gray-400 @enderror  focus:outline-none focus:ring-0">
-                                                </div>
-                                                <div class="grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label class="block text-xs " for="dirAltura">Altura</label>
-                                                    <input id="dirAltura" maxlength="20" wire:model="dirAltura" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirAltura') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0">
-                                                </div>
-                                                <div class="grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label class="block text-xs " for="dirProvincia">Provincia</label>
-                                                    <input id="dirProvincia" maxlength="30" wire:model="dirProvincia" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirProvincia') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0">
-                                                </div>
-                                                <div class="grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label class="block text-xs " for="dirLocalidad">Localidad</label>
-                                                    <input id="dirLocalidad" maxlength="50" wire:model="dirLocalidad" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirLocalidad') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0">
-                                                </div>
-                                                <div class="grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label class="block text-xs " for="dirCodPostal">Código Postal</label>
-                                                    <input id="dirCodPostal" maxlength="15" wire:model="dirCodPostal" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirCodPostal') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0">
-                                                </div>
-                                                <div class="grid grid-cols-[3.5rem_1fr] gap-2 mb-2 items-center">
-                                                    <label class="block text-xs " for="dirEntreCalles">Entre Calles</label>
-                                                    <input id="dirEntreCalles" maxlength="255" wire:model="dirEntreCalles" type="text" class="w-full px-2 py-1 text-xs border-[1px] @error('dirEntreCalles') border-red-500 @else border-gray-400 @enderror focus:outline-none focus:ring-0">
-                                                </div>
-                                            </div>
-
-                                        @endif
-                                    </div>
-
-
-                                </div> --}}
                             </div>
                 
                             <div>

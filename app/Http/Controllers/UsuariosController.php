@@ -34,4 +34,12 @@ class UsuariosController extends Controller
             'token' => $token
         ]);
     }
+
+    public function logAdmin(){
+        return view('admin/login-admin');
+    }
+
+    public function panelDeControl(){
+        return view('admin/panel-control');
+    }
 }
