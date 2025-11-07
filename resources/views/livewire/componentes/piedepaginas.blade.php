@@ -3,7 +3,7 @@
         <div class="flex flex-row space-x-4 md:justify-center">
             <a href="https://www.instagram.com/petalostextil" target="_blank" rel="noopener noreferrer" class="flex flex-col hover:opacity-80 transition-opacity">
                 <img 
-                src="{{ asset('imgs/logotipo-de-instagram.png') }}" 
+                src="{{ asset('imgs/img_sistema/logotipo-de-instagram.png') }}" 
                 alt="Pétalos Textil" 
                 class="w-[2rem] h-[2rem] object-cover">
             </a>
@@ -14,7 +14,7 @@
         </div>
         <div class="flex flex-row space-x-4 md:justify-center">
             <img 
-                src="{{ asset('imgs/telefono.png') }}" 
+                src="{{ asset('imgs/img_sistema/telefono.png') }}" 
                 alt="Pétalos Textil" 
                 class="w-[2rem] h-[2rem] object-cover">
             <div class="flex flex-col">
@@ -26,7 +26,7 @@
 
         <div class="flex flex-row space-x-4 md:justify-center">
             <img 
-                src="{{ asset('imgs/enlace.png') }}" 
+                src="{{ asset('imgs/img_sistema/enlace.png') }}" 
                 alt="Pétalos Textil" 
                 class="w-[2rem] h-[2rem] object-cover">
             <div class="flex flex-col">
@@ -38,7 +38,7 @@
 
         <div class="flex flex-row space-x-4 md:justify-center">
             <img 
-                src="{{ asset('imgs/medios-de-pago.png') }}" 
+                src="{{ asset('imgs/img_sistema/medios-de-pago.png') }}" 
                 alt="Pétalos Textil" 
                 class="w-[2rem] h-[2rem] object-cover">
             <div class="flex flex-col">

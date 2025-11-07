@@ -11,7 +11,7 @@
 }
 
 .body1 {
-    background-image: url('../../public/imgs/fondo-body.png');
+    background-image: url('../../public/imgs/img_sistema/fondo-body.png');
     background-repeat: repeat;
     background-attachment: fixed;
 }
@@ -113,7 +113,65 @@
         py-2 
         cursor-pointer 
         text-white;
-  }
+}
+
+.input-1{
+    @apply 
+        bg-white 
+        block 
+        w-full 
+        px-2 
+        py-2
+        border-[1px]
+        border-gray-400
+        focus:outline-none
+        focus:ring-0;
+}
+.input-1-err{
+    @apply 
+        bg-white 
+        block 
+        w-full 
+        px-2 
+        py-2
+        border-[1px]
+        border-red-500
+        focus:outline-none
+        focus:ring-0;
+}
+
+.textarea-1 {
+    @apply 
+        bg-white 
+        block 
+        w-full 
+        px-2 
+        py-2
+        border-[1px]
+        border-gray-400
+        focus:outline-none
+        focus:ring-0
+        min-h-[8rem]   /* alto mínimo */
+        max-h-[15rem]  /* alto máximo */
+        overflow-y-auto; /* activa scroll si se supera el alto máximo */
+}
+
+.textarea-1-err {
+    @apply 
+        bg-white 
+        block 
+        w-full 
+        px-2 
+        py-2
+        border-[1px]
+        border-red-500
+        focus:outline-none
+        focus:ring-0
+        min-h-[8rem]   /* alto mínimo */
+        max-h-[15rem]  /* alto máximo */
+        overflow-y-auto; /* activa scroll si se supera el alto máximo */
+}
+
 
 .grillas-celdas-1{
     @apply 

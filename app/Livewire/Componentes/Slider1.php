@@ -19,10 +19,10 @@ class Slider1 extends Component
     public function mount()
     {
         $this->imagenes = [
-            asset('imgs/slider1.jpeg'),
-            asset('imgs/slider2.jpeg'),
-            asset('imgs/slider1.jpeg'),
-            asset('imgs/slider2.jpeg'),
+            asset('imgs/img_slider/slider1.jpeg'),
+            asset('imgs/img_slider/slider2.jpeg'),
+            asset('imgs/img_slider/slider1.jpeg'),
+            asset('imgs/img_slider/slider2.jpeg'),
         ];
     }
 

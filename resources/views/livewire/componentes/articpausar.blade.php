@@ -1,5 +1,5 @@
 <div>
-    <img wire:click="VerForm()" title="Pausar" src="{{ asset('imgs/pausar.png') }}" alt="Revisar" class="cursor-pointer h-[1.5rem] w-[1.5rem]" />
+    <img wire:click="VerForm()" title="Pausar" src="{{ asset('imgs/img_sistema/pausar.png') }}" alt="Revisar" class="cursor-pointer h-[1.5rem] w-[1.5rem]" />
 
     <section 
         class="ventanaModal" 

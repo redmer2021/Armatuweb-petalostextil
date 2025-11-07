@@ -15,6 +15,9 @@ CREATE TABLE IF NOT EXISTS `cache` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `cache`;
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+	('petalostextil-cache-77de68daecd823babbb58edb1c8e14d7106e83bb', 'i:1;', 1762463799),
+	('petalostextil-cache-77de68daecd823babbb58edb1c8e14d7106e83bb:timer', 'i:1762463799;', 1762463799);
 
 CREATE TABLE IF NOT EXISTS `cache_locks` (
   `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -105,21 +108,21 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 
 DELETE FROM `sessions`;
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-	('ucgwLL6SjqQvmXo3vxtJQOl20D6cb5eLMRw93qOQ', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiaFJtUmcxcFBydjUzTUQxeWwxZXQ4ajdHb0s5cXBCYW5CNkdYdW5TeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wYW5lbERlQ29udHJvbCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1762289147);
+	('frdxWgnGen3lfang8jBDGFTtLxFUTD53hRPtPmgW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTnQxVGFoUnNwb1dHT0xkOGxQVkpzMFp3UTIySkZJVElVMjlzaG9lMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1762464814);
 
 CREATE TABLE IF NOT EXISTS `tb_articulos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `categoria` tinyint unsigned DEFAULT NULL,
-  `nombre` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `descrip` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `compoKit` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `caracDest` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `usosRec` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `notas` longtext COLLATE utf8mb4_unicode_ci,
-  `medidas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `peso` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cuotas` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `medidas` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `peso` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cuotas` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `precio` decimal(20,2) DEFAULT NULL,
   `descPorTransfer` tinyint DEFAULT NULL,
   `stockActual` tinyint DEFAULT NULL,
@@ -128,14 +131,15 @@ CREATE TABLE IF NOT EXISTS `tb_articulos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_articulos`;
 INSERT INTO `tb_articulos` (`id`, `codigo`, `categoria`, `nombre`, `descrip`, `compoKit`, `caracDest`, `usosRec`, `notas`, `medidas`, `peso`, `cuotas`, `precio`, `descPorTransfer`, `stockActual`, `visitas`, `pausado`, `created_at`, `updated_at`) VALUES
-	(1, 'ASD124', 1, 'Flores de Japón', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 10, 1414, 1, '2025-09-10 20:09:02', '2025-09-10 20:09:02'),
-	(2, 'FDS100', 1, 'Almendrado', NULL, NULL, NULL, NULL, NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 25, 501, 2, '2025-09-10 20:10:33', '2025-09-10 20:10:34'),
-	(3, 'SDK123', 2, 'Repasadores nido de avejas - pack x 4', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.    ', NULL, NULL, NULL, NULL, '50 cm x 67 cm', '40 g', NULL, 10000.00, 25, 5, 1125, 2, '2025-09-10 20:12:12', '2025-09-10 20:12:13'),
-	(4, 'KJD333', 3, 'Toallón con capucha - Espacial', 'TOALLÓN CON CAPUCHA + 2 TOALLITAS DE MANO – 100% ALGODÓN DOBLE FELPA\r\nIdeal para la rutina diaria de tu bebé. Combina suavidad, comodidad y funcionalidad en un solo producto. Perfecto para usar en casa, en el jardín o llevar en el bolso.\r\n', '- 1 toallón con capucha – Medida: 80 x 80 cm\r\nConfeccionado en algodón doble felpa ultra absorbente. Su capucha lo hace ideal para envolver al bebé luego del baño, manteniéndolo seco y abrigado.\r\n\r\n- 2 toallitas de mano – Medida: 30 x 40 cm\r\nPrácticas para llevar al jardín, usar como pañito multiuso o tener siempre a mano en el bolso del bebé.\r\n\r\nConfeccionado en algodón doble felpa 100%, extra suave al tacto, con excelente absorción y durabilidad.', 'Algodón 100% doble felpa: extra suave al tacto y de gran absorción.\r\nCosturas reforzadas para mayor durabilidad.\r\nNo pierde suavidad con los lavados.\r\nApto para lavarropas.\r\nEstampados infantiles con motivos delicados y colores suaves.\r\nConsultá disponibilidad al momento de comprar para elegir tu diseño preferido.\r\n', '- Bebés recién nacidos y niños pequeños.\r\n- Salida del baño.\r\n- Jardín maternal.\r\n- Regalo de nacimiento o baby shower.', 'El color del producto puede variar levemente en relación con la imagen, debido a la iluminación y la partida del tejido.\r\nLa imágenes son a modo de ilustración. ', '80 cm x 80 cm', '240 g', '6 cuotas sin interés de 3,666.66', 24000.00, 25, 100, 43, 1, '2025-09-10 20:13:41', '2025-09-10 20:13:41');
+	(1, 'ASD124', 1, 'Flores de Japón', 'Descrip 1', 'Composición kit', 'Otras características', 'Usos recomendados', NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 100, 14, 2, '2025-09-10 20:09:02', '2025-11-06 15:13:40'),
+	(2, 'FDS100', 1, 'Almendrado', 'Nuevo Producto disponible', 'uno', 'dos', 'tres', NULL, '144 cm x 200 cm', '120 g', '3 cuotas sin interés de 14,166.66', 42500.00, 25, 50, 505, 2, '2025-09-10 20:10:33', '2025-11-06 15:14:50'),
+	(3, 'SDK123', 2, 'Repasadores nido de avejas - pack x 4', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.    ', NULL, NULL, NULL, NULL, '50 cm x 67 cm', '40 g', NULL, 10000.00, 25, 5, 1132, 2, '2025-09-10 20:12:12', '2025-09-10 20:12:13'),
+	(4, 'KJD333', 3, 'Toallón con capucha - Espacial', 'TOALLÓN CON CAPUCHA + 2 TOALLITAS DE MANO – 100% ALGODÓN DOBLE FELPA\r\nIdeal para la rutina diaria de tu bebé. Combina suavidad, comodidad y funcionalidad en un solo producto. Perfecto para usar en casa, en el jardín o llevar en el bolso.\r\n', '- 1 toallón con capucha – Medida: 80 x 80 cm\r\nConfeccionado en algodón doble felpa ultra absorbente. Su capucha lo hace ideal para envolver al bebé luego del baño, manteniéndolo seco y abrigado.\r\n\r\n- 2 toallitas de mano – Medida: 30 x 40 cm\r\nPrácticas para llevar al jardín, usar como pañito multiuso o tener siempre a mano en el bolso del bebé.\r\n\r\nConfeccionado en algodón doble felpa 100%, extra suave al tacto, con excelente absorción y durabilidad.', 'Algodón 100% doble felpa: extra suave al tacto y de gran absorción.\r\nCosturas reforzadas para mayor durabilidad.\r\nNo pierde suavidad con los lavados.\r\nApto para lavarropas.\r\nEstampados infantiles con motivos delicados y colores suaves.\r\nConsultá disponibilidad al momento de comprar para elegir tu diseño preferido.\r\n', '- Bebés recién nacidos y niños pequeños.\r\n- Salida del baño.\r\n- Jardín maternal.\r\n- Regalo de nacimiento o baby shower.', 'El color del producto puede variar levemente en relación con la imagen, debido a la iluminación y la partida del tejido.\r\nLa imágenes son a modo de ilustración. ', '80 cm x 80 cm', '240 g', '6 cuotas sin interés de 3,666.66', 24000.00, 25, 100, 44, 2, '2025-09-10 20:13:41', '2025-09-10 20:13:41'),
+	(10, 'jhg234', 1, 'Copa de Vino', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. ', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. ', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     ', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam qui aspernatur voluptatem nobis. Autem quidem illo dicta sequi asperiores cupiditate, dolor maiores reprehenderit explicabo facere, doloremque velit suscipit, laborum optio.     ', NULL, '144 cm x 200 cm', '125g', NULL, 45000.00, 25, 10, 4, 1, '2025-11-06 21:17:11', '2025-11-06 21:17:11');
 
 CREATE TABLE IF NOT EXISTS `tb_carrito` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -147,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `tb_carrito` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_carrito`;
 INSERT INTO `tb_carrito` (`id`, `guidCarrito`, `idArticulo`, `cantidad`, `precioUnit`, `estado`, `created_at`, `updated_at`) VALUES
@@ -239,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `tb_fotos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DELETE FROM `tb_fotos`;
 INSERT INTO `tb_fotos` (`id`, `id_articulo`, `nro_foto`, `nomFoto`, `created_at`, `updated_at`) VALUES
@@ -257,7 +261,25 @@ INSERT INTO `tb_fotos` (`id`, `id_articulo`, `nro_foto`, `nomFoto`, `created_at`
 	(12, 4, 2, '527276334_17862732762444131_9165476238841151670_n.webp', '2025-09-10 23:16:53', '2025-09-10 23:16:53'),
 	(13, 4, 3, '528322835_17862732807444131_4680481195230986907_n.webp', '2025-09-10 23:16:53', '2025-09-10 23:16:53'),
 	(14, 2, 2, '527238038_17862335967444131_3999704133648464046_n.webp', '2025-09-10 23:16:13', '2025-09-10 23:16:13'),
-	(15, 2, 3, '527292099_17862335976444131_2310943107417420591_n.webp', '2025-09-10 23:16:13', '2025-09-10 23:16:13');
+	(15, 2, 3, '527292099_17862335976444131_2310943107417420591_n.webp', '2025-09-10 23:16:13', '2025-09-10 23:16:13'),
+	(18, 3, 6, '524890003_17861635638444131_7354434449787566008_n.webp', '2025-11-05 15:06:16', '2025-11-05 15:06:17'),
+	(19, 3, 7, '527276334_17862732762444131_9165476238841151670_n.webp', '2025-11-05 15:06:41', '2025-11-05 15:06:41'),
+	(20, 3, 8, '527188967_17862336747444131_9082503933697181980_n.webp', '2025-11-05 15:07:26', '2025-11-05 15:07:27'),
+	(21, 3, 9, '527238038_17862335967444131_3999704133648464046_n.webp', '2025-11-05 15:07:38', '2025-11-05 15:07:39'),
+	(28, 10, 1, 'art_1762463744.jpg', '2025-11-06 21:17:12', '2025-11-06 21:17:12');
+
+CREATE TABLE IF NOT EXISTS `tb_fotos_tmp` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nroArtic` int DEFAULT NULL,
+  `nroFoto` tinyint DEFAULT NULL,
+  `nomFoto` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM `tb_fotos_tmp`;
 
 CREATE TABLE IF NOT EXISTS `tb_provincias` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -385,7 +407,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ;
 
 DROP TABLE IF EXISTS `vta_catalogo`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vta_catalogo` AS select `a`.`id` AS `id`,`a`.`codigo` AS `codigo`,`a`.`categoria` AS `categoria`,`c`.`nombre` AS `nomCategoria`,`a`.`nombre` AS `nombre`,`a`.`precio` AS `precio`,`b`.`nomFoto` AS `nomFoto`,`a`.`cuotas` AS `cuotas`,`a`.`descPorTransfer` AS `descPorTransfer`,`a`.`stockActual` AS `stockActual`,`a`.`visitas` AS `visitas`,`a`.`descrip` AS `descrip`,`a`.`compoKit` AS `compoKit`,`a`.`caracDest` AS `caracDest`,`a`.`usosRec` AS `usosRec`,`a`.`medidas` AS `medidas`,`a`.`peso` AS `peso`,`a`.`notas` AS `notas`,`a`.`pausado` AS `pausado` from ((`tb_articulos` `a` join `vta_foto_principal` `b` on((`a`.`id` = `b`.`id_articulo`))) join `tb_categorias` `c` on((`a`.`categoria` = `c`.`id`)))
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vta_catalogo` AS select `a`.`id` AS `id`,`a`.`codigo` AS `codigo`,`a`.`categoria` AS `categoria`,`c`.`nombre` AS `nomCategoria`,`a`.`nombre` AS `nombre`,`a`.`precio` AS `precio`,`b`.`nomFoto` AS `nomFoto`,`a`.`cuotas` AS `cuotas`,`a`.`descPorTransfer` AS `descPorTransfer`,`a`.`stockActual` AS `stockActual`,`a`.`visitas` AS `visitas`,`a`.`descrip` AS `descrip`,`a`.`compoKit` AS `compoKit`,`a`.`caracDest` AS `caracDest`,`a`.`usosRec` AS `usosRec`,`a`.`medidas` AS `medidas`,`a`.`peso` AS `peso`,`a`.`notas` AS `notas`,`a`.`pausado` AS `pausado` from ((`tb_articulos` `a` left join `vta_foto_principal` `b` on((`a`.`id` = `b`.`id_articulo`))) left join `tb_categorias` `c` on((`a`.`categoria` = `c`.`id`)))
 ;
 
 DROP TABLE IF EXISTS `vta_foto_principal`;

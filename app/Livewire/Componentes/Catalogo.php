@@ -37,6 +37,7 @@ class Catalogo extends Component
     public $item_medidas = '';
     public $item_peso = '';
     public $item_notas = '';
+    public $item_pausado = 0;
     
 
     public function CerrarForm(){
@@ -149,7 +150,7 @@ class Catalogo extends Component
             $this->item_medidas = $articulo->medidas;
             $this->item_peso = $articulo->peso;
             $this->item_notas = $articulo->notas;
-
+            $this->item_pausado = $articulo->pausado;
         }
     }
 

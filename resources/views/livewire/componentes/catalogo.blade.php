@@ -9,7 +9,7 @@
                     
                     <!-- Imagen -->
                     <div class="flex-shrink-0 h-2/3">
-                        <img src="{{ asset('imgs/' . $it->nomFoto )}}"
+                        <img src="{{ asset('imgs/img_productos/' . $it->nomFoto )}}"
                             alt="Pétalos Textil"
                             class="h-full w-full object-cover rounded-lg">
                     </div>
@@ -41,22 +41,22 @@
         x-effect="document.body.classList.toggle('overflow-hidden', $wire.verForm)"
     >
         <div class="ventanaInterna_1">
-            <img src="{{ asset('imgs/cancelar.png' ) }}" 
+            <img src="{{ asset('imgs/img_sistema/cancelar.png' ) }}" 
                 alt="Cancelar"
                 wire:click="CerrarForm()"
                 class="absolute right-6 cursor-pointer h-[2rem] w-[2rem]">
 
-            <div class="mt-[3rem] grid grid-rows-[16%_40%_auto]  md:grid-cols-[12%_40%_auto] md:grid-rows-1 h-full gap-6">
+            <div class="mt-[3rem] grid grid-rows-[16%_40%_auto] md:grid-cols-[12%_40%_auto] md:grid-rows-1 h-full gap-6">
                 <!-- 🔹 Contenedor de miniaturas -->
                 <div class="flex flex-row items-center md:flex-col 
                     space-x-2 md:space-x-0 md:space-y-2 
                     overflow-x-auto md:overflow-y-auto 
-                    scrollbar-hide h-full">
+                    scrollbar-hide md:h-[67vh]">
 
                     @foreach ($item_fotosOtras as $item_foto)
                         <div class="cursor-pointer h-[7rem] w-[7rem] shrink-0">
                             <img 
-                                src="{{ asset('imgs/' . $item_foto->nomFoto) }}" 
+                                src="{{ asset('imgs/img_productos/' . $item_foto->nomFoto) }}" 
                                 alt="Pétalos Textil" 
                                 class="w-full h-full object-cover"
                                 wire:click="SeleccionaFoto('{{ $item_foto->nomFoto }}')"
@@ -66,9 +66,9 @@
                 </div>
 
                 <!-- 🔹 Imagen principal -->
-                <div class="h-[30rem] flex items-center justify-center overflow-hidden">
+                <div class="md:h-[67vh] flex items-center justify-center overflow-hidden">
                     <img 
-                        src="{{ asset('imgs/' . $item_fotoPrincipal) }}" 
+                        src="{{ asset('imgs/img_productos/' . $item_fotoPrincipal) }}" 
                         alt="Pétalos Textil" 
                         class="w-full h-full object-cover"
                     >
@@ -88,20 +88,26 @@
                         <p class="max-h-[11rem] overflow-y-auto mt-2 text-md" >{!! nl2br(e($item_descrip)) !!}</p>
                     @endif
 
-                    <div class="mt-[2rem] grid grid-cols-[30%_auto] md:gap-3">
-                        <div class="flex justify-center items-center border border-[#E9E9E9] rounded-md mr-2">
-                            <img src="{{ asset('imgs/restar.png') }}" alt="Restar" wire:click="Restar()" class="cursor-pointer h-[1.5rem] md:h-[1.3rem] w-auto">
-                            <span class="text-lg font-bold mx-4">{{ $cantItemsComprados }}</span>
-                            <img src="{{ asset('imgs/sumar.png') }}" alt="Sumar" wire:click="Sumar()" class="cursor-pointer h-[1.5rem] md:h-[1.3rem] w-auto">
+                    @if ($item_pausado == 2)
+                        <div class="mt-[2rem] grid grid-cols-[30%_auto] md:gap-3">
+                            <div class="flex justify-center items-center border border-[#E9E9E9] rounded-md mr-2">
+                                <img src="{{ asset('imgs/img_sistema/restar.png') }}" alt="Restar" wire:click="Restar()" class="cursor-pointer h-[1.5rem] md:h-[1.3rem] w-auto">
+                                <span class="text-lg font-bold mx-4">{{ $cantItemsComprados }}</span>
+                                <img src="{{ asset('imgs/img_sistema/sumar.png') }}" alt="Sumar" wire:click="Sumar()" class="cursor-pointer h-[1.5rem] md:h-[1.3rem] w-auto">
+                            </div>
+                            <div>
+                                <button wire:click="AgregarAlCarito()" class="cursor-pointer bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 px-[4rem] h-full py-3 text-white">Agregar al carrito</button>
+                            </div>                        
                         </div>
-                        <div>
-                            <button wire:click="AgregarAlCarito()" class="cursor-pointer bg-[#5D7857] hover:bg-[#405D39] transition-colors duration-200 px-[4rem] h-full py-3 text-white">Agregar al carrito</button>
-                        </div>                        
-                    </div>
+                    @else
+                        <div class="flex justify-center items-center bg-red-500 border border-[#E9E9E9] rounded-md my-4 py-3">
+                            <span class="text-white font-bold" >¡¡PUBLICACIÓN PAUSADA!!</span>
+                        </div>
+                    @endif
 
                     <div class="mt-[2rem]">
                         <div class="flex items-center ml-2 mb-2">
-                            <img src="{{ asset('imgs/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
+                            <img src="{{ asset('imgs/img_sistema/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
                             <span class="font-bold text-md ml-2">Envío a domicilio</span>
                         </div>
                         <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center mb-1">
@@ -112,7 +118,7 @@
                         </div>
                     </div>
                     <div class="pl-2 my-[2rem] flex items-center bg-[#FEF0E9]">
-                        <img src="{{ asset('imgs/ojo.png') }}" alt="Entregas" class="h-[1rem] w-auto">
+                        <img src="{{ asset('imgs/img_sistema/ojo.png') }}" alt="Entregas" class="h-[1rem] w-auto">
                         <span class="px-3 py-1 text-md italic ">¡¡Este artículo lo vieron <strong>{{ $item_visitas }}</strong> personas!!</span>
                     </div>
 

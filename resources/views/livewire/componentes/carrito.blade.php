@@ -1,6 +1,6 @@
 <div>
     <div wire:click="VerCarrito()" class="flex cursor-pointer relative">
-        <img src="{{ asset('imgs/carrito.svg') }}" alt="Carrito de compras" class="w-[2.8rem] h-[2.8rem]">
+        <img src="{{ asset('imgs/img_sistema/carrito.svg') }}" alt="Carrito de compras" class="w-[2.8rem] h-[2.8rem]">
         <div class="flex flex-col">
             <span class="text-[14px] hidden md:block font-bold md:text-[16px]">Carrito</span>
             <span class="md:hidden absolute -top-2 right-4 text-black">{{ $totalCantidad }}</span>
@@ -29,7 +29,7 @@
     >
         @if ($totalPrecio == 0)
             <div class="ventanaInterna_2 relative">
-                <img src="{{ asset('imgs/carrito-vacio.png') }}" alt="Carrito de compras" class="w-full h-full object-contain">
+                <img src="{{ asset('imgs/img_sistema/carrito-vacio.png') }}" alt="Carrito de compras" class="w-full h-full object-contain">
                 <div class="absolute bottom-2 right-2 flex flex-col">
                     <span class="mb-2 md:text-4xl text-black font-bold">CARRITO VACÍO</span>
                     <button wire:click="CerrarForm()" class="cursor-pointer bg-[#D4A373] hover:bg-[#E9EDC9] transition-colors duration-200 font-bold px-5 py-1 rounded-md text-black text-[12px] md:text-[15px]">Ir de compras!!</button>
@@ -37,7 +37,7 @@
             </div>
         @else
             <div class="ventanaInterna_1">
-                <img src="{{ asset('imgs/cancelar.png' ) }}" 
+                <img src="{{ asset('imgs/img_sistema/cancelar.png' ) }}" 
                     alt="Cancelar"
                     wire:click="CerrarForm()"
                     class="cursor-pointer absolute right-6 h-[2rem] w-[2rem]">
@@ -65,7 +65,7 @@
                 
                             <div>
                                 <div class="flex items-center ml-2 mb-2">
-                                    <img src="{{ asset('imgs/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
+                                    <img src="{{ asset('imgs/img_sistema/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
                                     <span class="text-xs ml-2">Envío a domicilio</span>
                                 </div>
                                 <div class="px-3 py-2 border border-[#E9E9E9] rounded-md mb-1">
@@ -140,7 +140,7 @@
                 
                             <div>
                                 <div class="flex items-center ml-2 mb-2">
-                                    <img src="{{ asset('imgs/localizacion.png') }}" alt="Entregas" class="h-[2rem] w-auto">
+                                    <img src="{{ asset('imgs/img_sistema/localizacion.png') }}" alt="Entregas" class="h-[2rem] w-auto">
                                     <span class="text-xs ml-2">Retirar en</span>
                                 </div>
                                 <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center">
@@ -161,7 +161,7 @@
 
                             <div class="mb-[2rem] md:mb-0">
                                 <div class="flex items-center ml-2 mb-2">
-                                    <img src="{{ asset('imgs/pagar-con.png') }}" alt="Pagar" class="h-[2rem] w-auto">
+                                    <img src="{{ asset('imgs/img_sistema/pagar-con.png') }}" alt="Pagar" class="h-[2rem] w-auto">
                                     <span class="text-xs ml-2">Pagar con:</span>
                                 </div>
                                 <div class="px-3 py-4 border border-[#E9E9E9] rounded-md flex flex-col">

@@ -37,7 +37,7 @@
             <div class="grillas-celdas-2">{{ $it->codigo }}</div>
             <div class="grillas-celdas-2">{{ $it->nomCategoria }}</div>
             <div class="grillas-celdas-2">
-                <img src="{{ asset('imgs/' . $it->nomFoto )}}"
+                <img src="{{ asset('imgs/img_productos/' . $it->nomFoto )}}"
                 alt="Pétalos Textil"
                 class="h-[5rem] w-full object-cover rounded-lg">
             </div>

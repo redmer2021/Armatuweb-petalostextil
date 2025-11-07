@@ -49,7 +49,6 @@ class Articpausar extends Component
             ->first();
     }
 
-
     public function render()
     {
         return view('livewire.componentes.articpausar');
