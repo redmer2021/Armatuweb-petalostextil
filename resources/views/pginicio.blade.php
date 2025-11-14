@@ -10,7 +10,7 @@
                 @livewire('componentes.buscador')
             </div>
             <div class="flex items-center space-x-2 mr-[15px]">
-                @livewire('componentes.nuevousr')
+                @livewire('componentes.usuarios.nuevousr')
                 @livewire('componentes.carrito')
             </div>
         </div>

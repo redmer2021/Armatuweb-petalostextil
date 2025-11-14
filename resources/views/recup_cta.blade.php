@@ -1,6 +1,6 @@
 @extends('layouts.pltgral')
 
 @section('contenidosPrincipales')
-    @livewire('componentes.generarpassword', ['token' => $token])
+    @livewire('componentes.usuarios.generarpassword', ['token' => $token])
 @endsection
 

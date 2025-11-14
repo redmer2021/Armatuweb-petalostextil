@@ -2,6 +2,6 @@
 
 @section('contenidosPrincipales')
 
-    @livewire('componentes.lstarticulos')
+    @livewire('componentes.admin.lstarticulos')
 
 @endsection

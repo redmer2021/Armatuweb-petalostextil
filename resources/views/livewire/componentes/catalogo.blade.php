@@ -9,9 +9,16 @@
                     
                     <!-- Imagen -->
                     <div class="flex-shrink-0 h-2/3">
-                        <img src="{{ asset('imgs/img_productos/' . $it->nomFoto )}}"
-                            alt="Pétalos Textil"
-                            class="h-full w-full object-cover rounded-lg">
+                        @if ($it->nomFoto != '')
+                            <img src="{{ asset('imgs/img_productos/' . $it->nomFoto )}}"
+                                alt="Pétalos Textil"
+                                class="h-full w-full object-cover rounded-lg">
+                        @else
+                            <img 
+                            src="{{ asset('imgs/img_sistema/sin_foto.jpg') }}" 
+                            alt="Pétalos Textil" 
+                            class="w-full h-full object-cover">
+                        @endif
                     </div>
 
                     <div class="flex-grow p-2 flex flex-col justify-between">
@@ -54,7 +61,7 @@
                     scrollbar-hide md:h-[67vh]">
 
                     @foreach ($item_fotosOtras as $item_foto)
-                        <div class="cursor-pointer h-[7rem] w-[7rem] shrink-0">
+                        <div class="cursor-pointer h-[7rem] w-[7rem] shrink-0">                            
                             <img 
                                 src="{{ asset('imgs/img_productos/' . $item_foto->nomFoto) }}" 
                                 alt="Pétalos Textil" 
@@ -67,11 +74,18 @@
 
                 <!-- 🔹 Imagen principal -->
                 <div class="md:h-[67vh] flex items-center justify-center overflow-hidden">
-                    <img 
-                        src="{{ asset('imgs/img_productos/' . $item_fotoPrincipal) }}" 
+                    @if ($item_fotoPrincipal!='')
+                        <img 
+                            src="{{ asset('imgs/img_productos/' . $item_fotoPrincipal) }}" 
+                            alt="Pétalos Textil" 
+                            class="w-full h-full object-cover"
+                        >                        
+                    @else
+                        <img 
+                        src="{{ asset('imgs/img_sistema/sin_foto.jpg') }}" 
                         alt="Pétalos Textil" 
-                        class="w-full h-full object-cover"
-                    >
+                        class="w-full h-full object-cover">                
+                    @endif
                 </div>
 
                 <!-- 🔹 Otro contenido -->

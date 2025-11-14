@@ -2,7 +2,7 @@
 
 @section('contenidosPrincipales')
 
-    @livewire('componentes.logadmin')
+    @livewire('componentes.admin.logadmin')
 
 @endsection
 

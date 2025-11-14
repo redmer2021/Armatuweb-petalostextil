@@ -403,7 +403,6 @@ class Carrito extends Component
         $this->tb_provincias = $query->get();
     }
 
-
     public function render()
     {
         return view('livewire.componentes.carrito');

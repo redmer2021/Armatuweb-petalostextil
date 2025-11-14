@@ -92,3 +92,6 @@ select
     c.nomFoto AS nomFoto from ((tb_carrito a join tb_articulos b on((a.idArticulo = b.id))) join tb_fotos c on((a.idArticulo = c.id_articulo)))
 
 
+comando para verificar fotos
+php artisan fotos:verificar
+
