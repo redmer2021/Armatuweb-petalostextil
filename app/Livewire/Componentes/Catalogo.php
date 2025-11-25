@@ -11,6 +11,7 @@ class Catalogo extends Component
 {
     public $categorias = [];
     public $idCategoria = 0;
+    public $nomCateg = '';
     public $titCatalogo = '';
     public $txtabuscar = '';
     public $mostrarBanner = false;
@@ -50,18 +51,18 @@ class Catalogo extends Component
     }
 
     public function AgregarAlCarito(){
-
         if ($this->guid == ''){
             $uuid = Str::uuid()->toString();
             DB::table('tb_carrito')->insert([
-                'guidCarrito' => $uuid,
+                'guidCarrito'   => $uuid,
                 'idArticulo'    => $this->item_id_articulo,
+                'nomFoto'       => $this->item_fotoPrincipal,
                 'cantidad'      => $this->cantItemsComprados,
                 'precioUnit'    => $this->item_precio,
-                'created_at'     => now(),
-                'updated_at'     => now(),
+                'created_at'    => now(),
+                'updated_at'    => now(),
             ]);
-
+            
             // Enviar el UUID al frontend
             $this->dispatch(
                 'guardar-uuid',   
@@ -69,15 +70,15 @@ class Catalogo extends Component
             );
             $this->setUuid($uuid);
             $this->dispatch('recalcular', uuid: $uuid);
-
+            
         } else {
-
+            
             // Verificar si ya existe ese artículo en el carrito
             $itemExistente = DB::table('tb_carrito')
             ->where('guidCarrito', $this->guid)
             ->where('idArticulo', $this->item_id_articulo)
             ->first();
-
+            
             if ($itemExistente) {
                 // Si ya existe, actualizamos sumando cantidad
                 DB::table('tb_carrito')
@@ -90,6 +91,7 @@ class Catalogo extends Component
                 DB::table('tb_carrito')->insert([
                     'guidCarrito' => $this->guid,
                     'idArticulo'    => $this->item_id_articulo,
+                    'nomFoto'       => $this->item_fotoPrincipal,
                     'cantidad'      => $this->cantItemsComprados,
                     'precioUnit'    => $this->item_precio,
                     'created_at'     => now(),
@@ -163,6 +165,12 @@ class Catalogo extends Component
     #[On('filtratCat')] 
     public function SelecCat($idCat){
         $this->idCategoria = $idCat;
+        
+        $this->nomCateg = DB::table('tb_categorias')
+        ->select('nombre')
+        ->where('id', $idCat)
+        ->value('nombre');
+        
         $this->txtabuscar = '';
     }
 

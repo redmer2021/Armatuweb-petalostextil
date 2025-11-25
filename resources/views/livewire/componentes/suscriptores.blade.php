@@ -5,7 +5,7 @@
         setTimeout(() => mostrarMensaje = false, 5000); 
     })">
     <p class="text-[#1F1F1F] text-[1.5rem] md:text-[2.5rem] ">Recibe en tu mail todas nuestras ofertas</p>
-    <p class="text-[#1F1F1F] text-md mb-[1rem] ">Déjanos tu e-mail y te enviaremos todas nuestras ofertas, promos y nuevos productos</p>
+    <p class="text-[#1F1F1F] text-lg mb-[1rem] ">Déjanos tu e-mail y te enviaremos todas nuestras ofertas, promos y nuevos productos</p>
     <div class="w-[95%] md:w-[50%] flex items-start rounded-md">
         <div class="flex flex-col flex-1 mr-[1rem]"> 
             <input wire:model="txtEmail" 

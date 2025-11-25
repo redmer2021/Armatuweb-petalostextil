@@ -5,6 +5,7 @@ namespace App\Livewire\Componentes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use LengthException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use MercadoPago\Client\Preference\PreferenceClient;
@@ -37,6 +38,8 @@ class Carrito extends Component
 
     #[On('cerrar-carrito')]
     public function CerrarForm(){
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->verForm=false;
     }
 
@@ -49,21 +52,22 @@ class Carrito extends Component
             'tipEnvio',
             'tipPago'
         ]);
-
-        if (Auth::check()){
-            $direcEnvios = DB::table('tb_direc_envios')
-            ->where('idUser', Auth::user()->id)
-            ->first();
-            if ($direcEnvios){
-                $this->dirCalleAltura = $direcEnvios->direccion;
-                $this->dirProvincia = $direcEnvios->idProvincia;
-                $this->dirLocalidad = $direcEnvios->localidad;
-                $this->dirBarrio = $direcEnvios->barrio;
-                $this->dirCodPostal = $direcEnvios->codPostal;
+        if (count($this->carrito) > 0){
+            if (Auth::check()){
+                $direcEnvios = DB::table('tb_direc_envios')
+                ->where('idUser', Auth::user()->id)
+                ->first();
+                if ($direcEnvios){
+                    $this->dirCalleAltura = $direcEnvios->direccion;
+                    $this->dirProvincia = $direcEnvios->idProvincia;
+                    $this->dirLocalidad = $direcEnvios->localidad;
+                    $this->dirBarrio = $direcEnvios->barrio;
+                    $this->dirCodPostal = $direcEnvios->codPostal;
+                }
             }
+            $this->verForm = true;
         }
 
-        $this->verForm = true;
     }
 
     #[On('recargar-carrito')] 
@@ -71,7 +75,7 @@ class Carrito extends Component
         $this->carrito = DB::table('vta_carrito')
         ->where('estado', 0)
         ->where('guidCarrito', $this->guidCarrito)
-        ->get();        
+        ->get();
     }
 
     #[On('recalcular')] 
@@ -260,8 +264,6 @@ class Carrito extends Component
                 ->update($updateData);    
         }
 
-        dd('p');
-        
         try{
             MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
             
@@ -300,6 +302,24 @@ class Carrito extends Component
         } catch (\Exception $e) {
             Log::info($e->getMessage());
         }
+    }
+
+    public function Confirmar(){
+        $this->RecargarCarrito();
+        $obj = [
+            'carrito'        => $this->carrito,
+            'tipEnvio'       => $this->tipEnvio,
+            'dirCalleAltura' => $this->dirCalleAltura,
+            'dirProvincia'   => $this->dirProvincia,
+            'dirLocalidad'   => $this->dirLocalidad,
+            'dirBarrio'      => $this->dirBarrio,
+            'dirCodPostal'   => $this->dirCodPostal,
+            'totalPrecio'   =>  $this->totalPrecio,
+        ];
+
+        session(['datos_fac' => $obj]);
+
+        return redirect()->route('finalizar-compra');
     }
 
     public function Aceptar(){
@@ -375,7 +395,6 @@ class Carrito extends Component
             $this->totalCantidad = 0;
             $this->totalPrecio   = 0;
         }
-
         
         //eliminar-uuid
         $this->dispatch(

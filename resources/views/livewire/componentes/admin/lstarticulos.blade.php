@@ -5,10 +5,11 @@
     <div class="flex space-x-2">
         @livewire('componentes.admin.articnuevo')
         @livewire('componentes.admin.editprecioenvios')
+        @livewire('componentes.admin.lstventas')
         <button wire:click="CerrarSesion()" class="btn-uno">Cerrar Sesion</button>
     </div>
 
-    <div class="mt-[1rem] grid gap-1 grid-cols-[130px_100px_100px_100px_300px_300px_300px_250px_100px_100px_80px_80px_80px_80px_100px]">
+    <div class="mt-[1rem] grid gap-1 grid-cols-[140px_100px_100px_100px_300px_300px_300px_250px_100px_100px_80px_80px_80px_80px_100px]">
         <div class="grillas-celdas-1">ACCIONES</div>
         <div class="grillas-celdas-1">COD</div>
         <div class="grillas-celdas-1">CATEGORÍA</div>

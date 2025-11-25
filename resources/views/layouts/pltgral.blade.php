@@ -26,7 +26,7 @@
         @livewireStyles
         @stack('styles') {{-- 🔹 permite que otros componentes agreguen estilos --}}
     </head>
-    <body class="body1">
+    <body>
         @yield('contenidosPrincipales')
 
         {{-- 🔹 Scripts globales --}}

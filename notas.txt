@@ -1,4 +1,4 @@
-https://hpanel.hostinger.com/
+https://hpanel.hostringer.com/
 recursoslienzovirtual@gmail.com
 Galleta1712
 
@@ -9,8 +9,6 @@ password     : 9Jz[Lc/l
 cuenta de mail en servidor de producción
 petalostextil@lienzovirtual.com.ar
 password: v/]$M^Wn?F6
-
-
 
 
 Generar una clave hash
@@ -61,16 +59,16 @@ Client Secret: iuNzCRvtmVlcGdADDRAzPFKK0oMyaZbh
 https://petalostextil.lienzovirtual.com.ar/clear-cache/Makako1029
 
 
-CREATE TABLE IF NOT EXISTS `tb_suscriptores` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS tb_suscriptores (
+  id int NOT NULL AUTO_INCREMENT,
+  email varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DELETE FROM `tb_suscriptores`;
-INSERT INTO `tb_suscriptores` (`id`, `email`, `created_at`, `updated_at`) VALUES
+DELETE FROM tb_suscriptores;
+INSERT INTO tb_suscriptores (id, email, created_at, updated_at) VALUES
 	(1, 'rmerlo@gmail.com', '2025-10-28 19:25:16', '2025-10-28 19:25:16'),
 	(3, 'rdm1@gmail.com', '2025-10-28 19:35:01', '2025-10-28 19:35:01'),
 	(4, 'rmerlo1@gmail.com', '2025-10-28 19:35:34', '2025-10-28 19:35:34'),
@@ -94,4 +92,108 @@ select
 
 comando para verificar fotos
 php artisan fotos:verificar
+
+
+
+Cuando se activa el carrito, poner un botón para Finalizar Compra, moverse a una pantalla donde se confirma todo el pedido,
+se muestra el resumen de la compra, se piden los datos de facturación, se debe permitir reasignar el lugar de entrega que puede ser
+igual a la dirección de facturación o uno alternativo. En esta pantalla, ya no se permiten modificar las cantidades compradas,
+luego se define el mecanismo de pago, si es transferencia o mercado pago. En cualquier condición, se dispara un mail al comprador
+con todos los datos de la compra, medio de envío, número de identificación de su compra, medio de pago. A partir de este momento,
+el pedido pasa a un estado de Pedido Ingresado. Desde la pantalla de admin, se verán todos estos pedidos en este estado: pedidos
+ingresados, el operador verifica el pago, la dirección de envío, etc, y cuando haya despachado el envío por correo, se cambiará el
+estado del pedido a Pedido Enviado, se dispara un nuevo mail indicando que el pedido ya está en viaje y se le envía al comprador
+un link de seguimiento de la empresa de transporte por donde se envía el pedido.
+
+
+
+SELECT 
+	a.id AS id,
+    a.guidCarrito,
+	a.nroVenta AS nroVenta,
+	a.estado AS estado,
+	b.nombre AS estadoDesc,
+	a.fecVenta AS fecVenta,
+    a.fecEnvio,
+    a.linkSeguimiento,
+    a.enviarADirAlt,
+	a.dtosFacNombre AS dtosFacNombre,
+	a.dtosFacApellido AS dtosFacApellido,
+    a.dtosFacDireccion,
+    a.dtosFacProvincia,
+    d.nombre as dtosFacProvinciaNombre,
+    a.dtosFacLocCiudad,
+    a.dtosFacCodPostal,
+    a.dtosFacTelefono,
+	a.dtosFacCorreoE AS dtosFacCorreoE,
+    a.dtosAltNombre,
+    a.dtosAltApellido,
+    a.dtosAltDireccion,
+    a.dtosAltProvincia,
+    e.nombre as dtosAltProvinciaNombre,
+    a.dtosAltLocCiudad,
+    a.dtosAltCodPostal,
+    a.dtosFacNotas,
+	a.formaDePago AS formaDePago,
+	c.nombre AS formaDePagoDesc,
+	a.totalPedido AS totalPedido, 
+	a.totalEnvio AS totalEnvio, 
+    a.totalDescTransfer as totalDescTransfer, 
+	a.enviarPor AS enviarPor     
+from tb_ventas a 
+left join vta_estado_pedidos b on a.estado = b.item 
+left join vta_forma_de_pago c on a.formaDePago = c.item
+left join tb_provincias d on a.dtosFacProvincia = d.id
+left join tb_provincias e on a.dtosAltProvincia = e.id
+
+
+SELECT 
+	a.id AS id,
+    a.guidCarrito,
+	a.nroVenta AS nroVenta,
+	a.estado AS estado,
+	b.nombre AS estadoDesc,
+	a.fecVenta AS fecVenta,
+    a.fecEnvio,
+    a.linkSeguimiento,
+    a.enviarADirAlt,
+	a.dtosFacNombre AS dtosFacNombre,
+	a.dtosFacApellido AS dtosFacApellido,
+    a.dtosFacDireccion,
+    a.dtosFacProvincia,
+    a.dtosFacLocCiudad,
+    a.dtosFacCodPostal,
+    a.dtosFacTelefono,
+	a.dtosFacCorreoE AS dtosFacCorreoE,
+    a.dtosAltNombre,
+    a.dtosAltApellido,
+    a.dtosAltDireccion,
+    a.dtosAltProvincia,
+    a.dtosAltLocCiudad,
+    a.dtosAltCodPostal,
+    a.dtosFacNotas,
+	a.formaDePago AS formaDePago,
+	c.nombre AS formaDePagoDesc,
+	a.totalPedido AS totalPedido, 
+	a.totalEnvio AS totalEnvio,
+    a.totalDescTransfer as totalDescTransfer, 
+	a.enviarPor AS enviarPor     
+from tb_ventas a
+left join vta_estado_pedidos b on a.estado = b.item
+left join vta_forma_de_pago c on a.formaDePago = c.item
+
+
+select a.id AS id,
+a.guidCarrito AS guidCarrito,
+a.idArticulo AS idArticulo,
+a.cantidad AS cantidad,
+a.precioUnit AS precioUnit,
+b.nombre AS nombre,
+b.stockActual AS stockActual,
+c.nro_foto AS nro_foto,
+a.nomFoto AS nomFoto,
+a.estado AS estado from tb_carrito a 
+join tb_articulos b on a.idArticulo = b.id 
+
+
 

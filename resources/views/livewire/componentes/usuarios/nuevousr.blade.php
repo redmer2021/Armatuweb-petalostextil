@@ -3,7 +3,7 @@
         <div class="flex items-center cursor-pointer">
             @if(Auth::check())
                 <!-- Usuario logueado -->
-                <img wire:click="VerCerrarSesion()" src="{{ asset('imgs/img_sistema/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2rem] w-auto">
+                <img wire:click="VerCerrarSesion()" src="{{ asset('imgs/img_sistema/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[1.5rem] md:h-[1.5rem] w-auto">
                 <div class="flex flex-col ml-2">
                     <span wire:click="EditarPerfil()" class="hover:underline md:text-[16px] hidden md:flex font-bold">{{ Auth::user()->nomApe }}</span>
                     <span wire:click="CerrarSesion()" class="hover:underline md:text-[16px] hidden md:flex">Cerrar Sesión</span>
@@ -12,7 +12,7 @@
             @else
                 <!-- Usuario no logueado -->
                 <div wire:click="VerLogin()" class="hover:underline flex cursor-pointer">
-                    <img  src="{{ asset('imgs/img_sistema/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[2rem] md:h-[2.3rem] w-auto">
+                    <img  src="{{ asset('imgs/img_sistema/userNuevo.svg') }}" alt="Nuevo Usuario" class="h-[2rem] w-auto">
                     <div class="flex flex-col ml-2">
                         <span class="text-[#1F1F1F] hidden md:block font-bold text-[14px] md:text-[16px]">Iniciar Sesión</span>
                         <span class="text-[#1F1F1F] hidden md:block text-[14px] md:text-[16px]">Registrate</span>

@@ -10,6 +10,8 @@ class Menutematico extends Component
     public $categorias = [];
 
     public function SelecCat($id){
+
+        $this->dispatch('setear_ver', estado: false);
         $this->dispatch('filtratCat', idCat: $id);
         $this->dispatch('defRender', varRender: false);
     }

@@ -1,11 +1,12 @@
 <section class="bg-white">
     <!--Barra de búsqueda por categorías o por nombre -->
-    <div class="pt-[8rem] py-1 px-5 md:px-20">
-        <p class="border-[#1F1F1F] border-b-[2px] mb-[2rem] text-[#1F1F1F] text-2xl md:text-3xl font-bold">Catálogo</p>
+    <div class="{{ $idCategoria == -1 ? 'py-[4rem]' : 'py-[8rem]' }} px-5 md:px-20">
+        @if ($idCategoria != -1)
+            <p class="border-[#1F1F1F] border-b-[2px] mb-[2rem] text-[#1F1F1F] text-2xl md:text-3xl font-bold">Catálogo  {{ $idCategoria == 0 ? '' : '/' }} <span class="font-normal">{{ $nomCateg }}</span></p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-0 md:px-10">
             @foreach ($listCatalogo as $it)
-                <div wire:click="IniciarCompra({{ $it->id }})" class="cursor-pointer flex flex-col h-[40rem] overflow-hidden hover:shadow-md shadow-[#405D39] p-4">
+                <div wire:click="IniciarCompra({{ $it->id }})" class="cursor-pointer flex flex-col h-[40rem] overflow-hidden transition-transform duration-500 ease-in-out hover:-translate-y-1.5 p-4">
                     
                     <!-- Imagen -->
                     <div class="flex-shrink-0 h-2/3">
@@ -38,6 +39,9 @@
             @endforeach
         </div>
 
+        @endif
+
+
     </div>
 
     <section 
@@ -61,7 +65,7 @@
                     scrollbar-hide md:h-[67vh]">
 
                     @foreach ($item_fotosOtras as $item_foto)
-                        <div class="cursor-pointer h-[7rem] w-[7rem] shrink-0">                            
+                        <div class="cursor-pointer h-[7rem] w-[7rem] shrink-0 transition-transform duration-500 ease-in-out hover:-translate-y-1">
                             <img 
                                 src="{{ asset('imgs/img_productos/' . $item_foto->nomFoto) }}" 
                                 alt="Pétalos Textil" 
@@ -121,7 +125,7 @@
 
                     <div class="mt-[2rem]">
                         <div class="flex items-center ml-2 mb-2">
-                            <img src="{{ asset('imgs/img_sistema/entrega-rapida.png') }}" alt="Entregas" class="h-[2rem] w-auto">
+                            <img src="{{ asset('imgs/img_sistema/entrega-rapida.svg') }}" alt="Entregas" class="h-[2rem] w-auto">
                             <span class="font-bold text-md ml-2">Envío a domicilio</span>
                         </div>
                         <div class="px-3 py-2 border border-[#E9E9E9] rounded-md flex justify-between items-center mb-1">
@@ -144,22 +148,21 @@
 
 
 @script
-<script>
-    document.addEventListener('livewire:navigated', () => {
-        const uuidGuardado = localStorage.getItem('carrito_uuid');
-        if (uuidGuardado) {
-            $wire.call('setUuid', uuidGuardado);
-        }
-    });
-</script>
-
+    <script>
+        document.addEventListener('livewire:navigated', () => {
+            const uuidGuardado = localStorage.getItem('carrito_uuid');
+            if (uuidGuardado) {
+                $wire.call('setUuid', uuidGuardado);
+            }
+        });
+    </script>
 @endscript
 
 @script
-<script>
-    window.addEventListener('guardar-uuid', event => {
-        const uuid = event.detail.uuid; 
-        localStorage.setItem('carrito_uuid', uuid);
-    });
-</script>
+    <script>
+        window.addEventListener('guardar-uuid', event => {
+            const uuid = event.detail.uuid; 
+            localStorage.setItem('carrito_uuid', uuid);
+        });
+    </script>
 @endscript

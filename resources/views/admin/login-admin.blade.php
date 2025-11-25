@@ -1,4 +1,4 @@
-@extends('layouts.pltgral')
+@extends('layouts.pltadmin')
 
 @section('contenidosPrincipales')
 
